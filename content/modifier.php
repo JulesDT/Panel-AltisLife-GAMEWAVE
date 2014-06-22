@@ -55,6 +55,11 @@ if(!Auth::isLogged()){
 				{
 					$res = $DB->query("SELECT * FROM players WHERE playerid='$j'");
 					$rows = $res->fetch(PDO::FETCH_OBJ);
+
+					// Affiche le contenu du garage, de manière distinct (1 seule catégorie de véhicule avec le nombre de véhicule du joueur / catégorie)
+					$res3=$DB->query("SELECT COUNT(classname) AS nbr_doublon, classname FROM vehicles WHERE pid = '$j' GROUP BY classname HAVING COUNT(classname) > 0 ORDER BY nbr_doublon DESC");
+					$res3->setFetchMode(PDO::FETCH_OBJ); 
+
 					$j==$rows->name;
 					?>
 					<!-- BAN -->
@@ -314,20 +319,50 @@ if(!Auth::isLogged()){
 								</div>
 								<?php } ?>
 								<?php if(Auth::isAdmin()){ ?>	
-								<div class="col-lg-12">
+								<div class="col-lg-6">
+									<div>
+										<p>
+											<strong>Garage :</strong>
+										</p>
+										<div class="panel panel-default">
+								      <div class="panel-heading">
+								        <h3 class="panel-title"><b>Véhicules de <?=$rows->name?></b></h3>
+								      </div>
+												<!-- Table -->
+			  								<table class="table">
+			  									<tbody>
+													<?php
+														foreach ($res3->fetchAll() as $rows3)
+														{
+															echo (
+																'<tr><td><a href="https://community.bistudio.com/wiki/File:Arma3_CfgVehicles_'.$rows3->classname.'.jpg" onclick="window.open(this.href); return false;">'
+																.$rows3->classname.
+																'</a></td><td><span class="badge" style="background:#428BCA; width:auto; float:right;">'
+																.$rows3->nbr_doublon.
+																' Examplaire(s)</span></td></tr>'
+																);
+														}
+													?>
+													</tbody>
+												</table>
+								    </div>
+									</div>
+								</div>
+								<div class="col-lg-6">
 									<div>
 										<p>
 										<strong>Equipement police :</strong>
-											<div class="input-group" style="height:180px;">
+											<div class="input-group" style="height:250px;">
 												<span class="input-group-addon">
 													<span class="glyphicon glyphicon-pencil"></span>
 												</span>
-												<textarea disabled style="height:180px;" type="text" name="cop_gear" value="" class="form-control"><?=$rows->cop_gear?></textarea>
+												<textarea disabled style="height:250px;" type="text" name="cop_gear" value="" class="form-control"><?=$rows->cop_gear?></textarea>
 											</div>
 										</p>
 									</div>
 								</div>
 								<?php } ?>
+								<!-- FIN -->
 							</div>
 						</form>
 					<?php

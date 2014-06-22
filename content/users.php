@@ -16,7 +16,7 @@ if(!Auth::isAdmin()){
 			</div>
             <?php include "recherche.php"; ?>
 			<form action="<?=WEBROOT?>joueur" method="post">
-				<a href="<?=WEBROOT?>users" class="list-group-item" style="background-color:#F8F8F8; color:#000;"<b>Liste des membre du panel administration</b></a>
+				<a href="<?=WEBROOT?>users" class="list-group-item" style="background-color:#F8F8F8; color:#000;"><b>Liste des membre du panel administration</b></a>
         <ul class="list-group" style="min-height: 298px; overflow: auto" name="search"> <!-- Permet d'afficher la liste de tout les joueurs (si pas de limit dans la requetes SQL) -->
         <?php
 
