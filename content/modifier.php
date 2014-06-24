@@ -17,7 +17,7 @@ if(!Auth::isLogged()){
       echo '</pre>';
       */
 			// C'est ici la source de tout probleme =D (dans le retour du $post)
-			if(isset($_POST) && isset($_POST['donatorlvl']) && isset($_POST['coplevel'])){
+			if(isset($_POST) && isset($_POST['cash']) && isset($_POST['bankacc'])){
 				if(Auth::isAdmin()){
 					$joueur = $_GET['j'];
 					$cash = $_POST['cash'];
@@ -33,11 +33,9 @@ if(!Auth::isLogged()){
 				}
 				elseif(Auth::isModo()){
 					$joueur = $_GET['j'];
-					$coplevel = $_POST['coplevel'];
-					$donatorlvl = $_POST['donatorlvl'];
-          $times = $_POST['times'];
-          $mounthDon = $_POST['mounthDon'];
-					$sqlupdate = "UPDATE players SET coplevel='$coplevel', donatorlvl='$donatorlvl', timestamp='$times', duredon='$mounthDon' WHERE playerid='$joueur'";
+					$cash = $_POST['cash'];
+					$bankacc = $_POST['bankacc'];
+					$sqlupdate = "UPDATE players SET cash='$cash', bankacc='$bankacc' WHERE playerid='$joueur'";
 					$update = $DB->exec($sqlupdate);
 					include WEBROOT.'success.php';
 				}
@@ -62,17 +60,14 @@ if(!Auth::isLogged()){
 
 					$j==$rows->name;
 					?>
-					<!-- BAN -->
-					<h2 style="margin-left:15px;">Editer le profil de <?=$rows->name?> (#<?=$rows->uid?>)
-					<?php if(Auth::isModo()){ ?><a href="<?=WEBROOT?>ban?j=<?=$rows->playerid?>"><button class="btn btn-danger" style="text-transform:uppercase; font-weight:bold; margin-left:10px;" type="submit"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;&nbsp;&nbsp;Ban</button></a><?php } ?>
-					<?php if(Auth::isAdmin()){ ?><a href="<?=WEBROOT?>ban?j=<?=$rows->playerid?>"><button class="btn btn-danger" style="text-transform:uppercase; font-weight:bold; margin-left:10px;" type="submit"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;&nbsp;&nbsp;Ban</button></a><?php } ?>
 
+					<h2 style="margin-left:15px;">Editer le profil de <?=$rows->name?> (#<?=$rows->uid?>)
 						<form id="update_profil" name="update_profil" action="<?=WEBROOT?>modifier?j=<?=$j?>" method="post" autocomplete="off">
 							
 								<div style="float:right; margin-right:15px;">
 									<button type="submit" class="btn btn-success" style="font-weight:bold; text-transform:uppercase; margin-top:-85px;"><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;&nbsp;Update</button>
 									<?php if(Auth::isAdmin()){ ?><a href="<?=WEBROOT?>delete_player?j=<?=$_GET['j']?>" class="btn btn-warning" style="font-weight:bold; text-transform:uppercase; margin-top:-85px;"><span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;Delete</a><?php } ?>							
-									<?php if(Auth::isModo()){ ?><a href="<?=WEBROOT?>delete_player?j=<?=$_GET['j']?>" class="btn btn-warning" style="font-weight:bold; text-transform:uppercase; margin-top:-85px;"><span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;Delete</a><?php } ?>
+									<?php if(Auth::isModo()){ ?><a href="<?=WEBROOT?>delete_player?j=<?=$_GET['j']?>" disabled class="btn btn-warning" style="font-weight:bold; text-transform:uppercase; margin-top:-85px;"><span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;Delete</a><?php } ?>
 								</div>
 							</h2><br>
 							<div class="col-lg-13">
@@ -86,6 +81,8 @@ if(!Auth::isLogged()){
 								?>
 							   </div>
 								<div class="col-lg-6">
+
+									<!-- Identifiant joueur -->
 									<div style="float:left; width:50%">
 										<p>
 										<strong>ID du joueur :</strong> 
@@ -97,6 +94,8 @@ if(!Auth::isLogged()){
 											</div>
 										</p>
 									</div>
+
+									<!-- Gestion de la durée du don -->
 									<div style="float:right; width:44%; display:none;">
 										<p>
 										<strong>Timestamp</strong>
@@ -106,7 +105,7 @@ if(!Auth::isLogged()){
 												</span>
                         <?php 
                           $tryIt=$rows->donatorlvl;
-                          if ($tryIt==5)
+                          if ($tryIt==1 || $tryIt==2 || $tryIt==3 || $tryIt==5)
                             {echo '<input type="text" name="times" value="'.$rows->timestamp.'" class="form-control">';}
                           else
                             {echo '<input type="text" name="times" value="'.time().'" class="form-control">';}
@@ -114,6 +113,8 @@ if(!Auth::isLogged()){
 											</div>
 										</p>
 									</div>
+
+									<!-- Argent liquide -->
 									<?php if(Auth::isModo()){ ?>
 									<div style="float:right; width:44%">
 										<p>
@@ -122,11 +123,12 @@ if(!Auth::isLogged()){
 												<span class="input-group-addon">
 													<span class="glyphicon glyphicon-usd"></span>
 												</span>
-												<input disabled type="text" name="cash" value="<?=$rows->cash?>" class="form-control">
+												<input type="text" name="cash" value="<?=$rows->cash?>" class="form-control">
 											</div>
 										</p>
 									</div>
 									<?php }?>
+
 									<?php if(Auth::isAdmin()){ ?>
 									<div style="float:right; width:44%">
 										<p>
@@ -140,6 +142,8 @@ if(!Auth::isLogged()){
 										</p>
 									</div>
 									<?php }?>
+
+									<!-- Compte en banque -->
 									<?php if(Auth::isModo()){ ?>
 									<div style="float:left; width:50%">
 										<p>
@@ -148,11 +152,12 @@ if(!Auth::isLogged()){
 												<span class="input-group-addon">
 													<span class="glyphicon glyphicon-home"></span>
 												</span>
-												<input type="text" disabled name="bankacc" value="<?=$rows->bankacc?>" class="form-control">
+												<input type="text" name="bankacc" value="<?=$rows->bankacc?>" class="form-control">
 											</div>
 										</p>
 									</div>
 									<?php }?>
+
 									<?php if(Auth::isAdmin()){ ?>
 									<div style="float:left; width:50%">
 										<p>
@@ -166,6 +171,8 @@ if(!Auth::isLogged()){
 										</p>
 									</div>
 									<?php }?>
+
+									<!-- Rang admin / non admin -->
 									<?php if(Auth::isModo()){ ?>
 									<div style="float:right; width:44%">
 										<p>
@@ -179,6 +186,7 @@ if(!Auth::isLogged()){
 										</p>
 									</div>
 									<?php } ?>
+
 									<?php if(Auth::isAdmin()){ ?>
 									<div style="float:right; width:44%">
 										<p>
@@ -192,12 +200,14 @@ if(!Auth::isLogged()){
 										</p>
 									</div>
 									<?php } ?>
+
+										<!-- Niveau flic -->
 									<?php if(Auth::isModo()){ ?>
 									<div style="float:left; width:50%">
 										<p>
 										<strong>Grade :</strong>
 											<div>
-												<select name="coplevel" class="form-control">
+												<select disabled name="coplevel" class="form-control">
 													<option <?php if($rows->coplevel==0){ echo 'selected="selected"'; } ?> value="0">Civil</option>
 													<option <?php if($rows->coplevel==1){ echo 'selected="selected"'; } ?> value="1">Recrue</option>
 													<option <?php if($rows->coplevel==2){ echo 'selected="selected"'; } ?> value="2">Brigadier</option>
@@ -211,6 +221,7 @@ if(!Auth::isLogged()){
 										</p>
 									</div>
 									<?php } ?>
+
 									<?php if(Auth::isAdmin()){ ?>
 									<div style="float:left; width:50%">
 										<p>
@@ -230,6 +241,8 @@ if(!Auth::isLogged()){
 										</p>
 									</div>
 									<?php } ?>
+
+									<!-- Donateur -->
 									<?php if(Auth::isAdmin()){ ?>
 									<div style="float:right; width:44%">
 										<p>
@@ -237,7 +250,7 @@ if(!Auth::isLogged()){
 											<div style="width:35%; float:left;">
 												<select name="donatorlvl" class="form-control">
 													<option <?php if($rows->donatorlvl==0){ echo 'selected="selected"'; } ?> value="0">Non</option>
-													<option <?php if($rows->donatorlvl==5){ echo 'selected="selected"'; } ?> value="5">Oui</option>
+													<option <?php if($rows->donatorlvl==1){ echo 'selected="selected"'; } ?> value="1">Oui</option>
 												</select>
 											</div>
 											<div style="width:60%; float:right;">
@@ -251,18 +264,19 @@ if(!Auth::isLogged()){
 										</p>
 									</div>
 									<?php } ?>
+
 									<?php if(Auth::isModo()){ ?>
 									<div style="float:right; width:44%">
 										<p>
 										<strong>Donateur :</strong>
 											<div style="width:35%; float:left;">
-												<select name="donatorlvl" class="form-control">
+												<select disabled name="donatorlvl" class="form-control">
 													<option <?php if($rows->donatorlvl==0){ echo 'selected="selected"'; } ?> value="0">Non</option>
-													<option <?php if($rows->donatorlvl==5){ echo 'selected="selected"'; } ?> value="5">Oui</option>
+													<option <?php if($rows->donatorlvl==1){ echo 'selected="selected"'; } ?> value="1">Oui</option>
 												</select>
 											</div>
 											<div style="width:60%; float:right;">
-												<select name="mounthDon" class="form-control">
+												<select disabled name="mounthDon" class="form-control">
 													<option <?php if($rows->duredon==0){ echo 'selected="selected"'; } ?> value="0">Non donateur</option>
 													<option <?php if($rows->duredon==1){ echo 'selected="selected"'; } ?> value="1">1 mois</option>
 													<option <?php if($rows->duredon==2){ echo 'selected="selected"'; } ?> value="2">2 mois</option>
@@ -273,6 +287,7 @@ if(!Auth::isLogged()){
 									</div>
 									<?php } ?>
 								</div>
+
 								<?php if(Auth::isModo()){ ?>								
 								<div class="col-lg-6" style="flaot:right;">
 									<div>
@@ -288,6 +303,7 @@ if(!Auth::isLogged()){
 									</div>
 								</div>
 								<?php } ?>
+
 								<?php if(Auth::isAdmin()){ ?>								
 								<div class="col-lg-6" style="flaot:right;">
 									<div>
@@ -303,22 +319,8 @@ if(!Auth::isLogged()){
 									</div>
 								</div>
 								<?php } ?>
-								<?php if(Auth::isModo()){ ?>	
-								<div class="col-lg-12">
-									<div>
-										<p>
-										<strong>Equipement police :</strong>
-											<div class="input-group" style="height:182px;">
-												<span class="input-group-addon">
-													<span class="glyphicon glyphicon-pencil"></span>
-												</span>
-												<textarea disabled style="height:182px;" type="text" name="cop_gear" value="" class="form-control"><?=$rows->cop_gear?></textarea>
-											</div>
-										</p>
-									</div>
-								</div>
-								<?php } ?>
-								<?php if(Auth::isAdmin()){ ?>	
+								
+								<!-- Garage visible par tous -->
 								<div class="col-lg-6">
 									<div>
 										<p>
@@ -361,7 +363,6 @@ if(!Auth::isLogged()){
 										</p>
 									</div>
 								</div>
-								<?php } ?>
 								<!-- FIN -->
 							</div>
 						</form>

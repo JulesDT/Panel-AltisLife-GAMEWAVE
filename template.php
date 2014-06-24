@@ -49,7 +49,7 @@
 					if(Auth::isLogged()){
 					?>
 						<li class="dropdown">
-		        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog" style="font-size:14px;"></span> Informations <b class="caret"></b></a>
+		        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog" style="font-size:14px;"></span> Infos <b class="caret"></b></a>
 			        <ul class="dropdown-menu">
 								<li>
 									<a href="<?=WEBROOT?>money"><span class="glyphicon glyphicon-euro" style="font-size:14px;"></span> Les plus riches</a>
@@ -74,7 +74,7 @@
 			        </ul>
 		      	</li>
 		      	<li>							
-							<a href="<?=WEBROOT?>disconnect" <?php if($_GET['p']=='disconnect'){ echo 'class="current-nav"'; } ?>><span class="glyphicon glyphicon-log-out" style="font-size:14px;"></span> Déconnexion </a>
+							<a href="<?=WEBROOT?>disconnect" <?php if($_GET['p']=='disconnect'){ echo 'class="current-nav"'; } ?>><span class="glyphicon glyphicon-log-out" style="font-size:14px;"></span> Déco </a>
 						</li>
 					<?php
 					}
