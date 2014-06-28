@@ -12,14 +12,13 @@
 			</div>
 			<?php include "recherche.php"; ?>
 			<form action="<?=WEBROOT?>joueur" method="post">
-
 				<a href="/" class="list-group-item" style="background-color:#F8F8F8; color:#000;"><b>Liste des joueurs enregistrés sur le serveur ALTISLIFE</b></a>
         
         
         <ul class="list-group" style="min-height: 298px; overflow: auto" name="search"> <!-- Permet d'afficher la liste de tout les joueurs (si pas de limit dans la requetes SQL) -->
         <?php
 				if ($search_value == '') {
-					$search = $DB->query("SELECT DISTINCT * FROM players ORDER BY uid DESC LIMIT 0, 100"); //Affiche la liste des 100 derniers joueurs qui se sont co au serveur
+					$search = $DB->query("SELECT * FROM players ORDER BY uid DESC LIMIT 0, 100"); //Affiche la liste des 100 derniers joueurs qui se sont co au serveur
 					}
 				else {
 					$search = $DB->query("SELECT DISTINCT * FROM players WHERE name LIKE '%$search_value%' OR playerid LIKE '%$search_value%' OR aliases LIKE '%$search_value%'" ); // Fait une recherche sur le "name" et l'alias "alias" (si ajout de : "OR aliases" dans la requête) du joueur
@@ -29,31 +28,19 @@
 				while($row = $search->fetch(PDO::FETCH_OBJ)){
             //Nom du joueur
 						echo '<a style="" class="list-group-item" href="modifier?j='.$row->playerid.'" value="'.$row->playerid.'">'.$row->name.'';
-						$pseudo=$row->name;
+						//Variables pour les infos
             $dntr_lvl=$row->donatorlvl;
             $bankacc=$row->bankacc;
             $cash=$row->cash;
             $adminlevel=$row->adminlevel;
             $coplevel=$row->coplevel;
-            $duredon=$row->duredon;
-
-            // Temps restant pour le don
-            $nbrjour=($duredon*30); // Nombre de jour (30,60 ou 90)
-            $tpsdons=((time())-($row->timestamp)); // date acctuelle moins la date du don (en timestamp)
-            $tpsdons=($nbrjour-ceil($tpsdons / (60 * 60 * 24))); // Transformation de la difference en nombre de jour
-
- 						//Donateur ou non
+            //Donateur ou non
             if ($dntr_lvl==0){
-                echo '<span class="badge" style="width:80px;" data-container="body" data-toggle="popover" data-placement="top" title="'. $pseudo .'" data-content="Membre non donateur"> non <span class="glyphicon glyphicon-heart" style="font-size:10px; float:right;"></span></span>';}
+                echo '<span class="badge"><span class="glyphicon glyphicon-heart" style="font-size:10px;"></span></span>';}
               else {
-                echo '<span class="badge" style="background:#D9534F; width:80px;"data-container="body"  data-toggle="popover" data-placement="top" title="'. $pseudo .'" data-content="Membre donateur pour '. $duredon .' mois, il lui reste '. $tpsdons .' jours.">'. $tpsdons .' jours <span class="glyphicon glyphicon-heart" style="font-size:10px; float:right;"></span></span>';}
-						//Compte en banque
-            if ($bankacc+$cash > 200000) {
-            	echo '<span class="badge" style="width:100px; background-color:#F0AD4E;" data-container="body"  data-toggle="popover" data-placement="top" title="Joueur SUSPECT : '. $pseudo .'" data-content="Le compte de cette personne présente des anomalies, il s\'agit d\'un membre récent déjà (très) riche.">'.number_format(($bankacc+$cash),0,",",".").' €</span>';
-            }
-            else {
-            	echo '<span class="badge" style="width:100px;" data-container="body" data-toggle="popover" data-placement="top" title="'. $pseudo .'" data-content="Banque '. number_format(($bankacc),0,",",".").'€ | Cash '. number_format(($cash),0,",",".") .'€">'.number_format(($bankacc+$cash),0,",",".").' €</span>';
-            }          
+                echo '<span class="badge" style="background:red;"><span class="glyphicon glyphicon-heart" style="font-size:10px;"></span></span>';}
+            //Compte en banque
+            echo '<span class="badge" style="width:100px;">'.number_format(($bankacc+$cash),0,",",".").' €</span>';           
             // Police ou non
             if ($coplevel==0){
                 echo '<span class="badge" style="background-color:#5CB85C; width:48px;">civil</span>';}

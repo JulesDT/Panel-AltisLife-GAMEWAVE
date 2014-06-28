@@ -250,7 +250,7 @@ if(!Auth::isLogged()){
 											<div style="width:35%; float:left;">
 												<select name="donatorlvl" class="form-control">
 													<option <?php if($rows->donatorlvl==0){ echo 'selected="selected"'; } ?> value="0">Non</option>
-													<option <?php if($rows->donatorlvl==5){ echo 'selected="selected"'; } ?> value="5">Oui</option>
+													<option <?php if($rows->donatorlvl==1){ echo 'selected="selected"'; } ?> value="1">Oui</option>
 												</select>
 											</div>
 											<div style="width:60%; float:right;">
@@ -272,7 +272,7 @@ if(!Auth::isLogged()){
 											<div style="width:35%; float:left;">
 												<select disabled name="donatorlvl" class="form-control">
 													<option <?php if($rows->donatorlvl==0){ echo 'selected="selected"'; } ?> value="0">Non</option>
-													<option <?php if($rows->donatorlvl==5){ echo 'selected="selected"'; } ?> value="5">Oui</option>
+													<option <?php if($rows->donatorlvl==1){ echo 'selected="selected"'; } ?> value="1">Oui</option>
 												</select>
 											</div>
 											<div style="width:60%; float:right;">
