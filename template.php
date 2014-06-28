@@ -187,5 +187,17 @@
 	<!-- JS panel -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
+    <!-- Appel des tooltips par type de balise (a, button) et par classe (.badge) -->
+		<script>
+			$(function (){
+			   $('a').tooltip();
+			   $('button').tooltip();
+			   $('.tooltipsAffiche').tooltip();
+			});
+		</script>
+		<!-- Appel des popup (popover) au passage de la souris -->
+		<script>
+      $(function () { $('.badge').popover({ trigger: "hover" });});
+   </script>
 </body>
 </html>
