@@ -5,14 +5,25 @@ if(Auth::isLogged()){
 ?>
 <div class="row">
 	<div class="col-lg-12">
-		<div class="page-header">
-			<h1 id="type">Se connecter</h1>
-		</div>
+	<!-- <img src="http://admin.altislife.fr/pictures/back_login.jpg" alt="background admin altislife" style="display:inline-block;" /> -->
 	</div>
-	<div class="col-lg-5">
+	<div class="center-block" style="width:390px; margin-top:10%;">
+		<div class="panel panel-default">
+			<div class="panel-heading"><h3 class="panel-title text-center">Se connecter</h3></div>
+			<div class="panel-body">
 		<?php
     error_reporting(0);
-		if(isset($_POST) && isset($_POST['username']) && isset($_POST['password'])){
+		if(empty($_POST) && empty($_POST['password']) && empty($_POST['username'])){
+			// include WEBROOT.'error.php';
+			?>
+			<div class="alert alert-info fade in text-center" role="alert">
+      	<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+      	<strong><span class="glyphicon glyphicon-fire"></span>
+      	<span>&nbsp;&nbsp;Remplir tous les champs du formulaire</span></strong>
+    	</div>
+			<?php
+		}
+		else{
 			$username = $_POST['username'];
 			$password = md5($_POST['password']);
 			if(!empty($username) && !empty($password)){
@@ -34,7 +45,13 @@ if(Auth::isLogged()){
           include WEBROOT.'success.php';
 				}
 				else{
-					include WEBROOT.'error.php';
+					?>
+					<div class="alert alert-warning fade in text-center" role="alert">
+		      	<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+		      	<strong><span class="glyphicon glyphicon-ban-circle"></span>
+		      	<span>&nbsp;&nbsp;Utilisateur non reconnu</span></strong>
+		    	</div>
+					<?php
 				}
 			}
 		}
@@ -42,12 +59,23 @@ if(Auth::isLogged()){
 			echo '<p>'.$error.'</p>';
 		}
 		?>
-		<form action="<?=WEBROOT?>login" method="post" autocomplete="off" class="bs-example form-horizontal">
-			<input type="text" name="username" placeholder="Nom d'utilisateur" class="form-control">
-			<br>
-			<input type="password" name="password" placeholder="Mot de passe" class="form-control">
-			<br>
-			<input type="submit" value="Se connecter" class="btn btn-primary">
-		</form>
+				<form action="<?=WEBROOT?>login" method="post" autocomplete="off" class="bs-example form-horizontal">
+					<div class="input-group">
+		  			<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+						<input type="text" name="username" placeholder="Nom d'utilisateur" class="form-control">
+					</div>
+					<br>
+					<div class="input-group">
+		  			<span class="input-group-addon"><span class="glyphicon glyphicon-eye-close"></span></span>
+						<input type="password" name="password" placeholder="Mot de passe" class="form-control">
+					</div>
+					<br>
+					<div style="float:right;">
+						<button type="reset" value="" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Effacer</button>
+						<button type="submit" value="" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> Connexion</button>
+					</div>
+				</form>
+			</div>
+			</div>
 	</div>
 </div>

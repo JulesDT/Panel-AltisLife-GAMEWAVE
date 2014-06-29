@@ -6,8 +6,28 @@
 	<!-- <link href="<?=WEBROOT?>css/bootswatch.min.css" rel="stylesheet"> -->
 	<link href="<?=WEBROOT?>css/bootstrap.min.css" rel="stylesheet"> 
 </head>
-<body>
+<?php
+	if(!Auth::isLogged()){
+?>
+	<body background="http://admin.altislife.fr/pictures/texture1.png">
+<?php
+	}
+	else{
+?>
+	<body>
+	<?php 
+		}
+		if(!Auth::isLogged()){
+	?>
+	<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+	<?php
+	}
+	else{
+	?>
 	<div class="navbar navbar-default navbar-fixed-top">
+	<?php
+		}
+	?>
 		<div class="container">
 			<div class="navbar-header">
 				<a href="<?=WEBROOT?>" class="navbar-brand"><span class="glyphicon glyphicon-home" style="font-size:16px;"></span>&nbsp;&nbsp;Administration</a>
@@ -17,7 +37,7 @@
 					<span class="icon-bar"></span>
 				</button>
 			</div>
-			<div class="navbar-collapse collapse" id="navbar-main">
+			<div class="collapse navbar-collapse" id="navbar-main">
 				<ul class="nav navbar-nav">
 					<?php
 					if(!Auth::isLogged()){
@@ -81,7 +101,7 @@
 					?>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="http://gamewave.fr/" target="_blank">GAMEWAVE &nbsp;&nbsp;<span class="glyphicon glyphicon-heart" style="font-size:14px; color:red;"></span></a></li>
+					<li><a href="http://altislife.fr/" target="_blank"><img src="pictures/altislife.png" height="20" /></a></li>
 				</ul>
 			</div>
 		</div>
@@ -150,7 +170,7 @@
 
 			<?php
 			// Si l'URL récupéré par le navigateur est différente des URL définis ci dessous, alors on affiche la liste des joueurs aléatoires. 
-			// En gros, si on est sur une page dont l'URL est définir ci dessous, on affiche pas la liste aléatoire des joueurs du serveur.
+			// En gros, si on est sur une page dont l'URL est défini ci dessous, on affiche pas la liste aléatoire des joueurs du serveur.
 			$basicUrl = "http://".$_SERVER['HTTP_HOST'];
 			$currentUrl = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; 
 			$lastUrl = $basicUrl."/last";
@@ -170,10 +190,20 @@
 			else{
 			?>
 			<br>
+			<?php
+			$URLbase = "http://".$_SERVER['HTTP_HOST'];
+			$URLactu = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+			$loginURL = $URLbase."/login";
+			if ($URLactu == $loginURL) {
+				// Nothing - On n'affiche pas la phrase de connexion au panel puisqu'on est sur la page de login
+			}
+			else{
+			?>
 			<div class="col-lg-12">
-				<h1 id="type">Connectez-vous pour accéder aux fonctionnalités du panel.</h1>
+				<a href="/login" style="text-decoration:none;"><h1 id="type" class="text-center" style="margin-top:10%; color:#5d5350;">Connectez-vous pour accéder aux fonctionnalités du panel</h1></a>
 			</div>
 			<?php
+			}
 			}
 			?>
     	</div>
@@ -187,7 +217,7 @@
 	<!-- JS panel -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
-    <!-- Appel des tooltips par type de balise (a, button) et par classe (.badge) -->
+    <!-- Appel des tooltips par type de balise (a, button) et par classe (.tooltipsAffiche) -->
 		<script>
 			$(function (){
 			   $('a').tooltip();
