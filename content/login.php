@@ -21,11 +21,17 @@ if(Auth::isLogged()){
       	<strong><span class="glyphicon glyphicon-fire"></span>
       	<span>&nbsp;&nbsp;Remplir tous les champs du formulaire</span></strong>
     	</div>
+    	<div class="alert alert-success fade in text-center" role="alert">
+      	<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+      	<strong>
+      		Connexion joueur avec l'identifiant "<i>user</i>"<br>et le mot de passe "<i>userpass</i>"
+      	</strong>
+    	</div>
 			<?php
 		}
 		else{
 			$username = $_POST['username'];
-			$password = md5($_POST['password']);
+			$password = sha1($_POST['password']);	
 			if(!empty($username) && !empty($password)){
 				$tab_co = array(
 					'username' => $username,

@@ -43,7 +43,7 @@
 					if(!Auth::isLogged()){
 					?>
 						<li>
-							<a href="<?=WEBROOT?>login" <?php if($_GET['p']=='login'){ echo 'class="current-nav"'; } ?>><span class="glyphicon glyphicon-log-in" style="font-size:14px;"></span> Se connecter</a>
+							<a href="<?=WEBROOT?>login" <?php if($_GET['p']=='login'){ echo 'class="current-nav"'; } ?>><span class="glyphicon glyphicon-log-in" style="font-size:14px;"></span> Connexion</a>
 						</li>
 					<?php
 					}
@@ -126,15 +126,17 @@
 						<?php
 						if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['role'])){
 							$username=$_POST['username'];
-							$password=md5($_POST['password']);
+							$password=sha1($_POST['password']);
+							$pseudo = ($_POST['pseudo']);
 							$role=$_POST['role'];
-							if(!empty($username) && !empty($password) && !empty($role)){
+							if(!empty($username) && !empty($password) && !empty($role) && !empty($pseudo)){
 								$d = array(
+									'pseudo' => $pseudo,
 									'username' => $username,
 									'password' => $password,
 									'role' => $role
 								);
-								$requ = $DB->prepare('INSERT INTO users (username,password,role) VALUE (:username,:password,:role)');
+								$requ = $DB->prepare('INSERT INTO users (pseudo,username,password,role) VALUE (:pseudo,:username,:password,:role)');
 								$requ->execute($d);
 								include WEBROOT.'content/success.php';
 							}
@@ -151,6 +153,11 @@
 						<div class="input-group">
 						  <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
 						  <input type="text" class="form-control" name="password" placeholder="Mot de passe">
+						</div>
+						<br>
+						<div class="input-group">
+						  <span class="input-group-addon"><span class="glyphicon glyphicon-tower"></span></span>
+						  <input type="text" class="form-control" name="pseudo" placeholder="Pseudo en jeu">
 						</div>
 						<br>
 						<select name="role" class="form-control">
@@ -180,7 +187,8 @@
 			$admins = $basicUrl."/admins";
 			$donators = $basicUrl."/donators";
 			$users = $basicUrl."/users";
-			if ($currentUrl !== $lastUrl && $currentUrl !== $moneyUrl  && $currentUrl !== $etaUrl && $currentUrl !== $police && $currentUrl !== $admins && $currentUrl !== $donators && $currentUrl !== $users) {
+			// strlen permet de calculer la longueur de l'URL courante. Si elle est égale à 54 (qui est le format de modification d'un profil -> http://admin.altislife.fr/modifier?j=76561197960498085 alors on masque la liste.)
+			if ($currentUrl !== $lastUrl && $currentUrl !== $moneyUrl  && $currentUrl !== $etaUrl && $currentUrl !== $police && $currentUrl !== $admins && $currentUrl !== $donators && $currentUrl !== $users && strlen($currentUrl) !== 54 ){
 				include 'content/liste.php';
 			}
 			?>

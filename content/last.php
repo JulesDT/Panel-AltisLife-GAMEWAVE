@@ -10,7 +10,11 @@
 			  <h3 id="type" style="text-transform:uppercase;">Les 100 derniers joueurs enregistrés</h3>
 			  <?php } ?>
 			</div>
-			<?php include "recherche.php"; ?>
+
+			<?php
+				// Recher et gametracker
+				include 'search.php';
+			?>
 			<form action="<?=WEBROOT?>joueur" method="post">
 
 				<a href="/" class="list-group-item" style="background-color:#F8F8F8; color:#000;"><b>Liste des joueurs enregistrés sur le serveur ALTISLIFE</b></a>
@@ -20,67 +24,33 @@
         <?php
 				if ($search_value == '') {
 					$search = $DB->query("SELECT DISTINCT * FROM players ORDER BY uid DESC LIMIT 0, 100"); //Affiche la liste des 100 derniers joueurs qui se sont co au serveur
-					}
-				else {
-					$search = $DB->query("SELECT DISTINCT * FROM players WHERE name LIKE '%$search_value%' OR playerid LIKE '%$search_value%' OR aliases LIKE '%$search_value%'" ); // Fait une recherche sur le "name" et l'alias "alias" (si ajout de : "OR aliases" dans la requête) du joueur
-					echo '<li class="list-group-item" disabled style="background-color:#DEE5EA;" value="'.$search_value.'">  Résultat de la recherche pour <b>'.$search_value.'</b></li>';
-				}
-        echo '<table style="width:100%;">';         
-				while($row = $search->fetch(PDO::FETCH_OBJ)){
-            //Nom du joueur
+				  echo '<table style="width:100%;">';
+					while($row = $search->fetch(PDO::FETCH_OBJ)){
+	          //Nom du joueur
 						echo '<a style="" class="list-group-item" href="modifier?j='.$row->playerid.'" value="'.$row->playerid.'">'.$row->name.'';
+						//Variables pour les infos bdd
 						$pseudo=$row->name;
-            $dntr_lvl=$row->donatorlvl;
-            $bankacc=$row->bankacc;
-            $cash=$row->cash;
-            $adminlevel=$row->adminlevel;
-            $coplevel=$row->coplevel;
-            $duredon=$row->duredon;
+	          $dntr_lvl=$row->donatorlvl;
+	          $bankacc=$row->bankacc;
+	          $cash=$row->cash;
+	          $adminlevel=$row->adminlevel;
+	          $coplevel=$row->coplevel;
+	          $duredon=$row->duredon;
 
-            // Temps restant pour le don
-            $nbrjour=($duredon*30); // Nombre de jour (30,60 ou 90)
-            $tpsdons=((time())-($row->timestamp)); // date acctuelle moins la date du don (en timestamp)
-            $tpsdons=($nbrjour-ceil($tpsdons / (60 * 60 * 24))); // Transformation de la difference en nombre de jour
-
- 						//Donateur ou non
-            if ($dntr_lvl==0){
-                echo '<span class="badge" style="width:80px;" data-container="body" data-toggle="popover" data-placement="top" title="'. $pseudo .'" data-content="Membre non donateur"> non <span class="glyphicon glyphicon-heart" style="font-size:10px;"></span></span>';}
-              else {
-                echo '<span class="badge" style="background:#D9534F; width:80px;"data-container="body"  data-toggle="popover" data-placement="top" title="'. $pseudo .'" data-content="Membre donateur pour '. $duredon .' mois, il lui reste '. $tpsdons .' jours.">'. $tpsdons .' jours <span class="glyphicon glyphicon-heart" style="font-size:10px;"></span></span>';}
-						//Compte en banque
-            if ($bankacc+$cash > 200000) {
-            	echo '<span class="badge" style="width:100px; background-color:#F0AD4E;" data-container="body"  data-toggle="popover" data-placement="top" title="Joueur SUSPECT : '. $pseudo .'" data-content="Le compte de cette personne présente des anomalies, il s\'agit d\'un membre récent déjà (très) riche.">'.number_format(($bankacc+$cash),0,",",".").' €</span>';
-            }
-            else {
-            	echo '<span class="badge" style="width:100px;" data-container="body" data-toggle="popover" data-placement="top" title="'. $pseudo .'" data-content="Banque '. number_format(($bankacc),0,",",".").'€ | Cash '. number_format(($cash),0,",",".") .'€">'.number_format(($bankacc+$cash),0,",",".").' €</span>';
-            }          
-            // Police ou non
-            if ($coplevel==0){
-                echo '<span class="badge" style="background-color:#5CB85C; width:48px;">civil</span>';}
-              else {
-                echo '<span class="badge" style="background:#428BCA; width:48px;">police</span>';}
-            // Level du joueur
-            if ($adminlevel==0){
-                echo '';}
-              else {
-                echo '<span class="badge" style="background:#F0AD4E;">admin</span>';}
-            //Fin de la ligne infos
-            echo '</a>';
-            }
-					$search->closeCursor();					
-					?>
-					</ul>
+	          // liste (boucle) des infos sur la ligne
+	          include 'badges.php';
+          }
+				}
+				else {
+						include 'search_req.php';
+				}
+        // Fermeture de la connexion à la BDD
+				$search->closeCursor();					
+				?>
+				</ul>
 				</div>
 			</form>
 		 </div>	  
-		<?php
-		}
-		else{
-		?>
-		<br>
-		<div class="col-lg-12">
-			<h1 id="type">Connectez-vous pour accéder aux fonctionnalités du panel.</h1>
-		</div>
 		<?php
 		}
 		?>
