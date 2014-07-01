@@ -102,10 +102,16 @@ if(!Auth::isLogged()){
       <div class="alert alert-warning" style="border:1px solid #faebcc;">
         <h3 style="margin-top:0px;">Alias utilisés précédemment <span class="glyphicon glyphicon-info-sign" style="float:right;"></span></h3>
         <?php
-          //Affichage des autres pseudos du joueur, avec un substring pour supprimer le formatage de la BDD
-           $suppr = array("\"", "`", "[", "]", "Error: No unit ,", "Error: No unit");
-           $onlyPseudo = str_replace($suppr, " ", $rows->aliases);
-           echo '<em>'.$onlyPseudo.'</em>';
+          if(Auth::isGuest()){
+            // Nothing, on masque les alias
+            echo '<em> pseudo et alias antérieurs masqués, vous êtes un visiteur et n\'avez pas le niveau d\'accréditation requis. </em>';
+          }
+          else{
+            //Affichage des autres pseudos du joueur, avec un substring pour supprimer le formatage de la BDD
+            $suppr = array("\"", "`", "[", "]", "Error: No unit ,", "Error: No unit");
+            $onlyPseudo = str_replace($suppr, " ", $rows->aliases);
+            echo '<em>'.$onlyPseudo.'</em>';
+          }
         ?>
       </div>
         <div style="float:left; width:48%">
@@ -467,6 +473,10 @@ if(!Auth::isLogged()){
       }
     // Si le champs recherche n'est pas vide on effectue la recherche
       else {
+        ?>
+        <a href="/" class="list-group-item" style="background-color:#F8F8F8; color:#000; margin-top:140px;"><b>Liste des joueurs enregistrés sur le serveur ALTISLIFE</b></a>       
+        <ul class="list-group" style="min-height: 298px; overflow: auto" name="search"> 
+      <?php
         include 'search_req.php';
       }
 		}
