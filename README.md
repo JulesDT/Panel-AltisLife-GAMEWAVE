@@ -19,4 +19,4 @@ profil
 ![ScreenShot](http://my-url.fr/screen/300614183903.png)
 
 Utilisateurs du panel
-![ScreenShot](http://my-url.fr/screen/090714220446.png)
+![ScreenShot](http://my-url.fr/screen/090714233308.png)
