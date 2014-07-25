@@ -18,5 +18,8 @@ recherche par pseudo / ID
 profil
 ![ScreenShot](http://my-url.fr/screen/300614183903.png)
 
+RconPHP (infos serveur)
+![ScreenShot](http://my-url.fr/screen/250714174830.png)
+
 Utilisateurs du panel
 ![ScreenShot](http://my-url.fr/screen/090714233308.png)
