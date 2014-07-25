@@ -9,23 +9,23 @@ if(Auth::isLogged()){
 	</div>
 	<div class="center-block" style="width:390px; margin-top:10%;">
 		<div class="panel panel-default">
-			<div class="panel-heading"><h3 class="panel-title text-center">Se connecter</h3></div>
+			<div class="panel-heading"><h3 class="panel-title text-center"><b>connexion</b></h3></div>
 			<div class="panel-body">
 		<?php
     error_reporting(0);
 		if(empty($_POST) && empty($_POST['password']) && empty($_POST['username'])){
 			// include WEBROOT.'error.php';
 			?>
-			<div class="alert alert-info fade in text-center" role="alert">
-      	<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-      	<strong><span class="glyphicon glyphicon-fire"></span>
-      	<span>&nbsp;&nbsp;Remplir tous les champs du formulaire</span></strong>
-    	</div>
-    	<div class="alert alert-success fade in text-center" role="alert">
+      <div class="alert alert-warning fade in text-center" role="alert">
       	<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
       	<strong>
       		Connexion joueur avec l'identifiant "<i>user</i>"<br>et le mot de passe "<i>userpass</i>"
       	</strong>
+    	</div>
+			<div class="alert alert-info fade in text-center" role="alert">
+      	<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+      	<strong><span class="glyphicon glyphicon-fire"></span>
+      	<span>&nbsp;&nbsp;Remplir tous les champs du formulaire</span></strong>
     	</div>
 			<?php
 		}

@@ -3,8 +3,12 @@
 <head>
 	<meta charset="utf-8">
 	<title>Administration AltisLife.fr</title>
-	<!-- <link href="<?=WEBROOT?>css/bootswatch.min.css" rel="stylesheet"> -->
-	<link href="<?=WEBROOT?>css/bootstrap.min.css" rel="stylesheet"> 
+	<link href="<?=WEBROOT?>css/bootstrap.min.css" rel="stylesheet">
+	<link href="<?=WEBROOT?>css/style.css" rel="stylesheet"> 
+	<!-- JS -->
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script src="/js/jquery.knob.js"></script>
+	<script src="/js/start.knob.js"></script>
 </head>
 <?php
 	if(!Auth::isLogged()){
@@ -76,6 +80,9 @@
 								</li>
 								<li>
 									<a href="<?=WEBROOT?>last"><span class="glyphicon glyphicon-eye-open" style="font-size:14px;"></span> Derniers joueurs</a>
+								</li>
+								<li>
+									<a href="<?=WEBROOT?>serveur"><span class="glyphicon glyphicon-fire" style="font-size:14px;"></span> Infos serveur</a>
 								</li>
 			        </ul>
 		      	</li>
@@ -187,8 +194,9 @@
 			$admins = $basicUrl."/admins";
 			$donators = $basicUrl."/donators";
 			$users = $basicUrl."/users";
+			$serveur = $basicUrl."/serveur";
 			// strlen permet de calculer la longueur de l'URL courante. Si elle est égale à 54 (qui est le format de modification d'un profil -> http://admin.altislife.fr/modifier?j=76561197960498085 alors on masque la liste.)
-			if ($currentUrl !== $lastUrl && $currentUrl !== $moneyUrl  && $currentUrl !== $etaUrl && $currentUrl !== $police && $currentUrl !== $admins && $currentUrl !== $donators && $currentUrl !== $users && strlen($currentUrl) !== 54 ){
+			if ($currentUrl !== $lastUrl && $currentUrl !== $moneyUrl  && $currentUrl !== $etaUrl && $currentUrl !== $police && $currentUrl !== $admins && $currentUrl !== $donators && $currentUrl !== $users && $currentUrl !== $serveur && strlen($currentUrl) !== 54 ){
 				include 'content/liste.php';
 			}
 			?>
@@ -237,5 +245,16 @@
 		<script>
       $(function () { $('.badge').popover({ trigger: "hover" });});
    </script>
+   <!-- Code de suivit analitycs -->
+   <script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-25526529-55', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
 </body>
 </html>

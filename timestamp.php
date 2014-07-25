@@ -1,6 +1,6 @@
 <?php
 // ÉTAPE 1 : Connexion en mysql connect au SGBD 
-mysql_connect("37.187.160.131", "ID_Utilisateur", "MDP_Utilisateur") or die('<h2 style="color:red; font-family:Calibri;">Connexion BDD impossible</h2>');
+mysql_connect("37.187.160.131", "ID_Utilisateur", "MDP_BaseDeDonnée") or die('<h2 style="color:red; font-family:Calibri;">Connexion BDD impossible</h2>');
 mysql_select_db("arma3life");
 //------------------------------
 //

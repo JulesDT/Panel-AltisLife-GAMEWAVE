@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 if(!Auth::isLogged()){
 	header('Location:'.WEBROOT);
 }
@@ -287,9 +287,9 @@ if(!Auth::isLogged()){
                 <select name="coplevel" class="form-control">
                   <option <?php if($rows->coplevel==0){ echo 'selected="selected"'; } ?> value="0">Civil</option>
                   <option <?php if($rows->coplevel==1){ echo 'selected="selected"'; } ?> value="1">Recrue</option>
-                  <option <?php if($rows->coplevel==2){ echo 'selected="selected"'; } ?> value="2">Brigadier</option>
-                  <option <?php if($rows->coplevel==3){ echo 'selected="selected"'; } ?> value="3">Sergent / Adjudant</option>
-                  <option <?php if($rows->coplevel==4){ echo 'selected="selected"'; } ?> value="4">Major</option>
+                  <option <?php if($rows->coplevel==2){ echo 'selected="selected"'; } ?> value="2">Brigadier / Sergent / Adjudant</option>
+                  <option <?php if($rows->coplevel==3){ echo 'selected="selected"'; } ?> value="3">Adjudant-chef</option>
+                  <option <?php if($rows->coplevel==4){ echo 'selected="selected"'; } ?> value="4">Major / Aspirant</option>
                   <option <?php if($rows->coplevel==5){ echo 'selected="selected"'; } ?> value="5">Lieutenant</option>
                   <option <?php if($rows->coplevel==6){ echo 'selected="selected"'; } ?> value="6">Commandant</option>
                   <option <?php if($rows->coplevel==7){ echo 'selected="selected"'; } ?> value="7">Colonel</option>
@@ -307,9 +307,9 @@ if(!Auth::isLogged()){
                 <select disabled name="coplevel" class="form-control">
                   <option <?php if($rows->coplevel==0){ echo 'selected="selected"'; } ?> value="0">Civil</option>
                   <option <?php if($rows->coplevel==1){ echo 'selected="selected"'; } ?> value="1">Recrue</option>
-                  <option <?php if($rows->coplevel==2){ echo 'selected="selected"'; } ?> value="2">Brigadier</option>
-                  <option <?php if($rows->coplevel==3){ echo 'selected="selected"'; } ?> value="3">Sergent / Adjudant</option>
-                  <option <?php if($rows->coplevel==4){ echo 'selected="selected"'; } ?> value="4">Major</option>
+                  <option <?php if($rows->coplevel==2){ echo 'selected="selected"'; } ?> value="2">Brigadier / Sergent / Adjudant</option>
+                  <option <?php if($rows->coplevel==3){ echo 'selected="selected"'; } ?> value="3">Adjudant-chef</option>
+                  <option <?php if($rows->coplevel==4){ echo 'selected="selected"'; } ?> value="4">Major / Aspirant</option>
                   <option <?php if($rows->coplevel==5){ echo 'selected="selected"'; } ?> value="5">Lieutenant</option>
                   <option <?php if($rows->coplevel==6){ echo 'selected="selected"'; } ?> value="6">Commandant</option>
                   <option <?php if($rows->coplevel==7){ echo 'selected="selected"'; } ?> value="7">Colonel</option>

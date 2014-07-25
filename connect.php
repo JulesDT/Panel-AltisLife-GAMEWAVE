@@ -1,16 +1,6 @@
 <?php
 session_start();
 
-try{
-	$DB = new PDO('mysql:host=localhost;dbname=arma3life','ID_Utilisateur','MDP_Utilisateur');
-}
-catch(PDOException $e){
-    echo $e->getMessage();
-    exit();
-}
-
-$DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
 define('WEBROOT', str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
 
 class Auth{

@@ -1,17 +1,24 @@
 <?php
-  ///////////////////////////// Requète préparé //////////////////////////////////////
+  ///////////////////////////// Requête préparée //////////////////////////////////////
   
   /* TESTS
   echo '<pre>';
   print_r($_POST);
   echo '</pre>';
   */
-
-  $search = $DB->prepare("SELECT DISTINCT * FROM players WHERE name LIKE :search_value OR playerid LIKE :search_value OR aliases LIKE :search_value");
-  $search->bindValue(':search_value', '%'. $search_value . '%');
-  $search->execute();
+  
+  if(Auth::isGuest()){
+    $search = $DB->prepare("SELECT DISTINCT * FROM players WHERE name LIKE :search_value OR playerid LIKE :search_value"); // pas de rechercher sur l'alias pour le guest
+    $search->bindValue(':search_value', '%'. $search_value . '%');
+    $search->execute();
+  }
+  else{  
+    $search = $DB->prepare("SELECT DISTINCT * FROM players WHERE name LIKE :search_value OR playerid LIKE :search_value OR aliases LIKE :search_value");
+    $search->bindValue(':search_value', '%'.$search_value.'%');
+    $search->execute();
+  }
  
-    while($row = $search->fetch(PDO::FETCH_OBJ)){
+   while($row = $search->fetch(PDO::FETCH_OBJ)){
     //Nom du joueur
     echo '<a style="" class="list-group-item" href="modifier?j='.$row->playerid.'" value="'.$row->playerid.'">'.$row->name.'';
     //Variables pour les infos bdd
@@ -25,7 +32,9 @@
 
     // liste (boucle) des infos sur la ligne
     include 'badges.php';
-    }
+   }
     // Fermeture des résultats
     $search->closeCursor(); 
 ?>
+
+
