@@ -50,9 +50,17 @@ if(!Auth::isLogged()){
 			}
 			// Récupération de l'id du joueur
 			$j = $_GET['j'];
-
+			$jLong = strlen($j);
+			
+			if(!is_numeric($j) || $jLong !== 17){
+				exit('CACA MOU FDP !');
+			}
+			
 			// Requetage
-			$res = $DB->query("SELECT * FROM players WHERE playerid='$j'");
+			$requete = 'SELECT * FROM players WHERE playerid = :joueur';
+			$res = $DB->prepare($requete) or die(print_r($DB->errorInfo()));
+			$res->bindParam(':joueur', $j, PDO::PARAM_STR);
+			$res->execute();
 			$rows = $res->fetch(PDO::FETCH_OBJ);
 
 				if(empty($j) || empty($rows->uid)){
@@ -287,12 +295,13 @@ if(!Auth::isLogged()){
                 <select name="coplevel" class="form-control">
                   <option <?php if($rows->coplevel==0){ echo 'selected="selected"'; } ?> value="0">Civil</option>
                   <option <?php if($rows->coplevel==1){ echo 'selected="selected"'; } ?> value="1">Recrue</option>
-                  <option <?php if($rows->coplevel==2){ echo 'selected="selected"'; } ?> value="2">Brigadier / Sergent / Adjudant</option>
-                  <option <?php if($rows->coplevel==3){ echo 'selected="selected"'; } ?> value="3">Adjudant-chef</option>
+                  <option <?php if($rows->coplevel==2){ echo 'selected="selected"'; } ?> value="2">Brigadier / Sergent</option>
+                  <option <?php if($rows->coplevel==3){ echo 'selected="selected"'; } ?> value="3">Adjudant / Adjudant-chef</option>
                   <option <?php if($rows->coplevel==4){ echo 'selected="selected"'; } ?> value="4">Major / Aspirant</option>
                   <option <?php if($rows->coplevel==5){ echo 'selected="selected"'; } ?> value="5">Lieutenant</option>
                   <option <?php if($rows->coplevel==6){ echo 'selected="selected"'; } ?> value="6">Commandant</option>
                   <option <?php if($rows->coplevel==7){ echo 'selected="selected"'; } ?> value="7">Colonel</option>
+								  <option <?php if($rows->coplevel==8){ echo 'selected="selected"'; } ?> value="8">Capitaine</option>
                 </select>
               </div>
             </p>
@@ -307,12 +316,13 @@ if(!Auth::isLogged()){
                 <select disabled name="coplevel" class="form-control">
                   <option <?php if($rows->coplevel==0){ echo 'selected="selected"'; } ?> value="0">Civil</option>
                   <option <?php if($rows->coplevel==1){ echo 'selected="selected"'; } ?> value="1">Recrue</option>
-                  <option <?php if($rows->coplevel==2){ echo 'selected="selected"'; } ?> value="2">Brigadier / Sergent / Adjudant</option>
-                  <option <?php if($rows->coplevel==3){ echo 'selected="selected"'; } ?> value="3">Adjudant-chef</option>
+                  <option <?php if($rows->coplevel==2){ echo 'selected="selected"'; } ?> value="2">Brigadier / Sergent</option>
+                  <option <?php if($rows->coplevel==3){ echo 'selected="selected"'; } ?> value="3">Adjudant / Adjudant-chef</option>
                   <option <?php if($rows->coplevel==4){ echo 'selected="selected"'; } ?> value="4">Major / Aspirant</option>
                   <option <?php if($rows->coplevel==5){ echo 'selected="selected"'; } ?> value="5">Lieutenant</option>
                   <option <?php if($rows->coplevel==6){ echo 'selected="selected"'; } ?> value="6">Commandant</option>
                   <option <?php if($rows->coplevel==7){ echo 'selected="selected"'; } ?> value="7">Colonel</option>
+									<option <?php if($rows->coplevel==8){ echo 'selected="selected"'; } ?> value="8">Capitaine</option>
                 </select>
               </div>
             </p>
