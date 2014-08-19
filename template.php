@@ -84,6 +84,9 @@
 								<li>
 									<a href="<?=WEBROOT?>serveur"><span class="glyphicon glyphicon-fire" style="font-size:14px;"></span> Infos serveur</a>
 								</li>
+								<li>
+									<a href="<?=WEBROOT?>logs"><span class="glyphicon glyphicon-time" style="font-size:14px;"></span> Logs du serveur</a>
+								</li>
 			        </ul>
 		      	</li>
 		      	<li class="dropdown">
@@ -117,7 +120,7 @@
 	<div class="container">
     <div class="row">
 			<?php
-			if(Auth::isLogged()){
+			if(Auth::isAdmin()){
 			?>
 
 			<!-- Modal Ajout utilisateur -->
@@ -181,8 +184,9 @@
 			    </div>
 			  </div>
 			</div>
-
 			<?php
+			}
+			if(Auth::isLogged()){
 			// Si l'URL récupéré par le navigateur est différente des URL définis ci dessous, alors on affiche la liste des joueurs aléatoires. 
 			// En gros, si on est sur une page dont l'URL est défini ci dessous, on affiche pas la liste aléatoire des joueurs du serveur.
 			$basicUrl = "http://".$_SERVER['HTTP_HOST'];
@@ -195,8 +199,9 @@
 			$donators = $basicUrl."/donators";
 			$users = $basicUrl."/users";
 			$serveur = $basicUrl."/serveur";
+			$logs = $basicUrl."/logs";
 			// strlen permet de calculer la longueur de l'URL courante. Si elle est égale à 54 (qui est le format de modification d'un profil -> http://admin.altislife.fr/modifier?j=76561197960498085 alors on masque la liste.)
-			if ($currentUrl !== $lastUrl && $currentUrl !== $moneyUrl  && $currentUrl !== $etaUrl && $currentUrl !== $police && $currentUrl !== $admins && $currentUrl !== $donators && $currentUrl !== $users && $currentUrl !== $serveur && strlen($currentUrl) !== 54 ){
+			if ($currentUrl !== $lastUrl && $currentUrl !== $moneyUrl  && $currentUrl !== $etaUrl && $currentUrl !== $police && $currentUrl !== $admins && $currentUrl !== $donators && $currentUrl !== $users && $currentUrl !== $serveur && $currentUrl !== $logs && strlen($currentUrl) !== 54 ){
 				include 'content/liste.php';
 			}
 			?>
