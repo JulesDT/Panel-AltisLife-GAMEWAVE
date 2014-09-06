@@ -19,7 +19,7 @@ Vous devriez avoir à peu près ça dans votre table "users" à la fin ! :
 Première connexion :
 ========================
 Si tout fonctionne bien, vous devriez pouvoir vous connecter au panel, les identifiants par défaut son :
-  - URL: celle de votre serveur (ex : http://admin.altislife.fr/à)
+  - URL: celle de votre serveur (ex : http://admin.altislife.fr/)
   - ID : admin
   - MDP: admin
 
