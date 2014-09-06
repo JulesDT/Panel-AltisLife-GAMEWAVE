@@ -190,7 +190,8 @@
 			// Si l'URL récupéré par le navigateur est différente des URL définis ci dessous, alors on affiche la liste des joueurs aléatoires. 
 			// En gros, si on est sur une page dont l'URL est défini ci dessous, on affiche pas la liste aléatoire des joueurs du serveur.
 			$basicUrl = "http://".$_SERVER['HTTP_HOST'];
-			$currentUrl = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; 
+			$currentUrl = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+			$location = $_SERVER['REQUEST_URI'];
 			$lastUrl = $basicUrl."/last";
 			$moneyUrl = $basicUrl."/money";
 			$etaUrl = $basicUrl."/eta";
@@ -200,8 +201,8 @@
 			$users = $basicUrl."/users";
 			$serveur = $basicUrl."/serveur";
 			$logs = $basicUrl."/logs";
-			// strlen permet de calculer la longueur de l'URL courante. Si elle est égale à 54 (qui est le format de modification d'un profil -> http://admin.altislife.fr/modifier?j=76561197960498085 alors on masque la liste.)
-			if ($currentUrl !== $lastUrl && $currentUrl !== $moneyUrl  && $currentUrl !== $etaUrl && $currentUrl !== $police && $currentUrl !== $admins && $currentUrl !== $donators && $currentUrl !== $users && $currentUrl !== $serveur && $currentUrl !== $logs && strlen($currentUrl) !== 54 ){
+			// strlen permet de calculer la longueur de l'URL $location courante. Si elle est égale à 29 (qui est le format de modification d'un profil -> /modifier?j=76561197960498085 alors on masque la liste.)
+			if ($currentUrl !== $lastUrl && $currentUrl !== $moneyUrl  && $currentUrl !== $etaUrl && $currentUrl !== $police && $currentUrl !== $admins && $currentUrl !== $donators && $currentUrl !== $users && $currentUrl !== $serveur && $currentUrl !== $logs && strlen($location) !== 29 ){
 				include 'content/liste.php';
 			}
 			?>
