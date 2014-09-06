@@ -9,22 +9,23 @@ Installation :
 ========================
 C'est asssez simple (n'hésitez pas à me contacter par mail / GitHub). Il vous suffit dé télécharger la dernière version du Git, de l'uploader dans votre FTP (local sur la machine hébergeant le serveur Arma, si vous n'avez pas défini de connnexion distante SQL dans la configuration MySQL).
 
-Par la suite, vous devez récupérer la base de donnée "users.sql" (à la racine du Git) et de l'importer dans votre base de donnée "arma3life". Avec PHPmyAdmin ou Navicat (par exemple), vous n'avez qu'a créer une nouvelle table "users" dans la base de donnée "arma3life" et importer le fichier fourni ici même :)
+Par la suite, vous devez récupérer la base de donnée "users.sql" (à la racine du Git) et l'importer dans votre base de donnée "arma3life". Avec PHPmyAdmin ou Navicat (par exemple), vous n'avez qu'à créer une nouvelle table "users" dans la base de donnée "arma3life" et importer le fichier fourni ici même :)
 
-Pour configurer les accès BDD (serveur, utilisateur, password) : vous devez éditer le fichier "bdd.php" en remplacant les champs par vos identifiants respectifs.
+Pour configurer les accès BDD (serveur, utilisateur, password) : vous devez éditer le fichier "bdd.php" en remplacant les champs par vos identifiants de connexion base de donnée respectifs.
 
-Vous devriez avoir ça dans votre table "users" à la fin ! :
+Vous devriez avoir à peu près ça dans votre table "users" à la fin ! :
 ![ScreenShot](http://my-url.fr/screen/060914143458.png)
 
 Première connexion :
 ========================
 Si tout fonctionne bien, vous devriez pouvoir vous connecter au panel, les identifiants par défaut son :
+  - URL: celle de votre serveur (ex : http://admin.altislife.fr/à)
   - ID : admin
   - MDP: admin
 
 Pensez à les changer en base de donnée ;) (encryption SHA1)
 
-C'est fini ! Pour le reste, allez bidouiller dans les fichiers, n'ayez pas peur, c'est du procédural, pas forcément "propre" mais testé et apprové par de gros serveurs (Fantasma, AltisLifefr.com, Renaissance, GAMEWAVE (Altislife.fr) etc ...)
+C'est fini ! Pour le reste, allez bidouiller dans les fichiers, n'ayez pas peur, c'est du procédural (pas d'objet ni de classe), pas forcément le plus "propre" mais testé et approuvé par de gros serveurs (Fantasma, AltisLifefr.com, Renaissance, GAMEWAVE (Altislife.fr) etc ...)
 
 Côté technique :
 ========================
