@@ -34,7 +34,7 @@ Côté technique :
   - Vérification des GET
   - htaccess
   - Session
-  - Niveau d'administration (viisiteur, modérateur, admin)
+  - Niveau d'administration (visiteur [1], modérateur [2], admin[3])
 
 Captures d'écran
 ========================
