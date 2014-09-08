@@ -5,6 +5,13 @@ Panel de gestion des utilisateurs, des dons et de la quasi totalité des fonctio
 
 Réutilisation autorisée par tous, sous condition de citer la source (BloodMotion) ainsi que le lien du Github :-)
 
+<b>Demo (online guest access)</b> : http://admin.altislife.fr/login
+<br>
+<b>ID</b> : user
+<br>
+<b>MDP</b> : userpass
+<br>
+
 Installation :
 ========================
 C'est assez simple (n'hésitez pas à me contacter par mail / GitHub). Il vous suffit dé télécharger la dernière version du Git, de l'uploader dans votre FTP (local sur la machine hébergeant le serveur Arma, si vous n'avez pas défini de connexion distante SQL dans la configuration MySQL).
