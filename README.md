@@ -17,10 +17,9 @@ Installation :
 
 <b>Prérequis :</b>
 <ul>
- <li>Activer le mod rewrite sur apache !</li>
- <li>Autoriser (par défaut normalement) l'open short tag pour PHP</li>
+ <li>Activer le <span style="color:#D5001D;font-weight:bold;">mod rewrite</b> sur apache !</li>
+ <li>Autoriser (par défaut normalement) l'<span style="color:#D5001D;font-weight:bold;">open short tag</span> pour PHP</li>
 </ul>
-<br>
 <br>
 
 C'est assez simple (n'hésitez pas à me contacter par mail / GitHub). Il vous suffit dé télécharger la dernière version du Git, de l'uploader dans votre FTP (local sur la machine hébergeant le serveur Arma, si vous n'avez pas défini de connexion distante SQL dans la configuration MySQL).
