@@ -14,6 +14,13 @@ Réutilisation autorisée par tous, sous condition de citer la source (BloodMoti
 
 Installation :
 ========================
+
+PRÉREQUIS :
+======================
+<ul>
+ <li>Activer le mod rewrite sur apache !</li>
+ <li>Autoriser (par défaut normalement) l'open short tag pour PHP</li>
+</ul>
 C'est assez simple (n'hésitez pas à me contacter par mail / GitHub). Il vous suffit dé télécharger la dernière version du Git, de l'uploader dans votre FTP (local sur la machine hébergeant le serveur Arma, si vous n'avez pas défini de connexion distante SQL dans la configuration MySQL).
 
 Par la suite, vous devez récupérer la base de donnée "users.sql" (à la racine du Git) et l'importer dans votre base de donnée "arma3life". Avec PHPmyAdmin ou Navicat (par exemple), vous n'avez qu'à créer une nouvelle table "users" dans la base de donnée "arma3life" et importer le fichier fourni ici même :)
