@@ -17,8 +17,8 @@ Installation :
 
 <b>Prérequis :</b>
 <ul>
- <li>Activer le <span style="color:#D5001D;font-weight:bold;">mod rewrite</b> sur apache !</li>
- <li>Autoriser (par défaut normalement) l'<span style="color:#D5001D;font-weight:bold;">open short tag</span> pour PHP</li>
+ <li>Activer le <b style="color:#D5001D;">mod rewrite</b> sur apache !</li>
+ <li>Autoriser (par défaut normalement) l'<b style="color:#D5001D;">open short tag</b> pour PHP</li>
 </ul>
 <br>
 
