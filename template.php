@@ -208,7 +208,7 @@ function getcurrentpath()
 			if(Auth::isLogged()){
 			// Si l'URL récupéré par le navigateur est différente des URL définis ci dessous, alors on affiche la liste des joueurs aléatoires. 
 			// En gros, si on est sur une page dont l'URL est défini ci dessous, on affiche pas la liste aléatoire des joueurs du serveur.
-			$basicUrl = getcurrentpath();;
+			$basicUrl = getcurrentpath();
 			$currentUrl = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 			$location = $_SERVER['REQUEST_URI'];
 			$lastUrl = $basicUrl."last";
@@ -220,8 +220,9 @@ function getcurrentpath()
 			$users = $basicUrl."users";
 			$serveur = $basicUrl."serveur";
 			$logs = $basicUrl."logs";
+			$modifier = $basicUrl."modifier";
 			// strlen permet de calculer la longueur de l'URL $location courante. Si elle est égale à 29 (qui est le format de modification d'un profil -> /modifier?j=76561197960498085 alors on masque la liste.)
-			if ($currentUrl != $lastUrl && $currentUrl != $moneyUrl  && $currentUrl != $etaUrl && $currentUrl != $police && $currentUrl != $admins && $currentUrl != $donators && $currentUrl != $users && $currentUrl != $serveur && $currentUrl != $logs && strlen($location) != 29 ){
+			if ($currentUrl != $lastUrl && $currentUrl != $moneyUrl  && $currentUrl != $etaUrl && $currentUrl != $police && $currentUrl != $admins && $currentUrl != $donators && $currentUrl != $users && $currentUrl != $serveur && $currentUrl != $logs && strlen($location) != 29 && substr($currentUrl, 0, -20) != $modifier ){
 				include 'content/liste.php';
 			}
 			?>
