@@ -1,3 +1,22 @@
+<?php
+
+function getcurrentpath()
+{   $curPageURL = "";
+    if ($_SERVER["HTTPS"] != "on")
+            $curPageURL .= "http://";
+     else
+        $curPageURL .= "https://" ;
+    if ($_SERVER["SERVER_PORT"] == "80")
+        $curPageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+     else
+        $curPageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+        $count = strlen(basename($curPageURL));
+        $path = substr($curPageURL,0, -$count);
+    return $path ;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -189,20 +208,20 @@
 			if(Auth::isLogged()){
 			// Si l'URL récupéré par le navigateur est différente des URL définis ci dessous, alors on affiche la liste des joueurs aléatoires. 
 			// En gros, si on est sur une page dont l'URL est défini ci dessous, on affiche pas la liste aléatoire des joueurs du serveur.
-			$basicUrl = "http://".$_SERVER['HTTP_HOST'];
+			$basicUrl = getcurrentpath();;
 			$currentUrl = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 			$location = $_SERVER['REQUEST_URI'];
-			$lastUrl = $basicUrl."/last";
-			$moneyUrl = $basicUrl."/money";
-			$etaUrl = $basicUrl."/eta";
-			$police = $basicUrl."/police";
-			$admins = $basicUrl."/admins";
-			$donators = $basicUrl."/donators";
-			$users = $basicUrl."/users";
-			$serveur = $basicUrl."/serveur";
-			$logs = $basicUrl."/logs";
+			$lastUrl = $basicUrl."last";
+			$moneyUrl = $basicUrl."money";
+			$etaUrl = $basicUrl."eta";
+			$police = $basicUrl."police";
+			$admins = $basicUrl."admins";
+			$donators = $basicUrl."donators";
+			$users = $basicUrl."users";
+			$serveur = $basicUrl."serveur";
+			$logs = $basicUrl."logs";
 			// strlen permet de calculer la longueur de l'URL $location courante. Si elle est égale à 29 (qui est le format de modification d'un profil -> /modifier?j=76561197960498085 alors on masque la liste.)
-			if ($currentUrl !== $lastUrl && $currentUrl !== $moneyUrl  && $currentUrl !== $etaUrl && $currentUrl !== $police && $currentUrl !== $admins && $currentUrl !== $donators && $currentUrl !== $users && $currentUrl !== $serveur && $currentUrl !== $logs && strlen($location) !== 29 ){
+			if ($currentUrl != $lastUrl && $currentUrl != $moneyUrl  && $currentUrl != $etaUrl && $currentUrl != $police && $currentUrl != $admins && $currentUrl != $donators && $currentUrl != $users && $currentUrl != $serveur && $currentUrl != $logs && strlen($location) != 29 ){
 				include 'content/liste.php';
 			}
 			?>
