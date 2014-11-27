@@ -485,7 +485,7 @@ if(!Auth::isLogged()){
       else {
         ?>
         <a href="/" class="list-group-item" style="background-color:#F8F8F8; color:#000; margin-top:140px;"><b>Liste des joueurs enregistrés sur le serveur ALTISLIFE</b></a>       
-        <ul class="list-group" style="min-height: 298px;" name="search"> 
+        <ul class="list-group" name="search"> 
       <?php
         include 'search_req.php';
       }

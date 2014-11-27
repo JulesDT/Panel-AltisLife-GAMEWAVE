@@ -22,7 +22,7 @@ if(!Auth::isAdmin()){
 	  <form action="<?=WEBROOT?>joueur" method="post">
 		<a href="<?=WEBROOT?>users" class="list-group-item" style="background-color:#F8F8F8; color:#000;"><b>Liste des membre du panel administration</b></a>
       <!-- Permet d'afficher la liste de tout les joueurs (si pas de limit dans la requetes SQL) -->
-      <ul class="list-group" style="min-height: 298px;" name="search">
+      <ul class="list-group" name="search">
         <?php
 	      if ($search_value == ''){  
           $search = $DB->query("SELECT * FROM users WHERE role = '1' OR role = '2' OR role = '3' ORDER BY role DESC"); //Affiche les membres du panel admin
