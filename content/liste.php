@@ -15,7 +15,7 @@
 		<a href="/" class="list-group-item" style="background-color:#F8F8F8; color:#000;"><b>Liste des joueurs enregistrés sur le serveur ALTISLIFE</b></a>
     
     
-    <ul class="list-group" style="min-height: 298px; overflow: auto" name="search"> <!-- Permet d'afficher la liste de tout les joueurs (si pas de limit dans la requetes SQL) -->
+    <ul class="list-group" style="min-height: 298px;" name="search"> <!-- Permet d'afficher la liste de tout les joueurs (si pas de limit dans la requetes SQL) -->
     <?php
 		if ($search_value == '') {
 			$search = $DB->query("SELECT DISTINCT * FROM players ORDER BY rand() LIMIT 0, 7"); //Affiche des joueurs de manière aléatoire (limite de 7 résultats)
