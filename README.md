@@ -55,19 +55,19 @@ Captures d'écran
 ========================
 
 connexion
-![ScreenShot](http://my-url.fr/screen/300614183612.png)
+![ScreenShot](http://tuk.fr/s/300614183612.png)
 
 accueil
-![ScreenShot](http://my-url.fr/screen/300614183705.png)
+![ScreenShot](http://tuk.fr/s/300614183705.png)
 
 recherche par pseudo / ID
-![ScreenShot](http://my-url.fr/screen/300614184152.png)
+![ScreenShot](http://tuk.fr/s/300614184152.png)
 
 profil
-![ScreenShot](http://my-url.fr/screen/300614183903.png)
+![ScreenShot](http://tuk.fr/s/300614183903.png)
 
 RconPHP (infos serveur)
-![ScreenShot](http://my-url.fr/screen/250714174830.png)
+![ScreenShot](http://tuk.fr/s/250714174830.png)
 
 Utilisateurs du panel
-![ScreenShot](http://my-url.fr/screen/090714233308.png)
+![ScreenShot](http://tuk.fr/s/090714233308.png)
