@@ -28,7 +28,7 @@ Par la suite, vous devez récupérer la base de donnée "users.sql" (à la racin
 Pour configurer les accès BDD (serveur, utilisateur, password) : vous devez éditer le fichier "bdd.php" en remplacant les champs par vos identifiants de connexion base de donnée respectifs.
 
 Vous devriez avoir à peu près ça dans votre table "users" à la fin ! :
-![ScreenShot](http://my-url.fr/screen/060914143458.png)
+![ScreenShot](http://tuk.fr/s/060914143458.png)
 
 Première connexion :
 ========================
