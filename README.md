@@ -19,6 +19,7 @@ Installation :
 <ul>
  <li>Activer le <b style="color:#D5001D;">mod rewrite</b> sur apache !</li>
  <li>Autoriser (par défaut normalement) l'<b style="color:#D5001D;">open short tag</b> pour PHP</li>
+ <li><b style="color:D5001D;">La structure de la BDD est légèrement chagée (deux colones en plus) afin de traiter les donateurs automatiquements</b></li>
 </ul>
 
 C'est assez simple (n'hésitez pas à me contacter par mail / GitHub). Il vous suffit dé télécharger la dernière version du Git, de l'uploader dans votre FTP (local sur la machine hébergeant le serveur Arma, si vous n'avez pas défini de connexion distante SQL dans la configuration MySQL).
