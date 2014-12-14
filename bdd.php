@@ -1,7 +1,10 @@
 <?php
+$ip = "localhost";
+$bdd = "arma3life";
+$user = "nom_utilisateur";
+$passwd = "mot_de_passe";
 try{
-	// Editer la configuration ici (connexion BDD)
-	$DB = new PDO('mysql:host=localhost;dbname=arma3life','ID_Utilisateur','MDP_BaseDeDonnée');
+    $DB = new PDO('mysql:host='.$ip.';dbname='.$bdd, $user, $passwd);
 }
 catch(PDOException $e){
     echo $e->getMessage();

@@ -35,7 +35,7 @@ $Timer = Number_Format( MicroTime( true ) - $Timer, 4, '.', '' );
 <script src="../js/start.knob.js"></script>
 
 <div id="player1" class="jumbotron col-lg-12" style="background:#FCFAFA; padding:30px;">
-	<div class="col-lg-3 text-center">
+	<div class="col-lg-4 text-center">
 		<input class="knob" data-width="150" data-height="150" data-min="0" data-max="<?php print_r($Info['MaxPlayers']); ?>" data-displayPrevious=true data-fgColor="#f1c40f" data-skin="tron" data-readOnly=true  data-thickness=".2" value="<?php print_r($Info['Players']); ?>">
 		<h4>Joueurs connectés</h4>
 		<span class="text-muted">Nous avons en ce moment <b><?php print_r($Info['Players']); ?></b> joueurs connectés sur le serveur pour un total de <b><?php print_r($Info['MaxPlayers']); ?></b> slots civils / policiers.</span>
@@ -59,7 +59,7 @@ while($row = $search1->fetch(PDO::FETCH_OBJ)){
 	$totmoney = round($totmoney, -8);
 	$startmon = number_format(($totmoney),0,",",".");
 ?>
-<div class="col-lg-3 text-center">
+<div class="col-lg-4 text-center">
 	<input class="knob" data-width="150" data-height="150" data-min="0" data-max="5" data-displayPrevious=true data-fgColor="#2ecc71" data-skin="tron" data-readOnly=true  data-thickness=".2" value="<?php echo $startmon; ?>">
 	<h4>Masse monétaire</h4>
 	<span class="text-muted">En tout, les joueurs ont accumulé un total de <b><span id="money1"><?php echo $savmoney; ?></span> €</b> soit un montant de <b><span id="money2"><?php echo $midmoney; ?></span> €</b> par joueur.</span>
@@ -74,7 +74,7 @@ while($row2 = $search2->fetch(PDO::FETCH_OBJ)){
 	//Variables
 	$tothouse = $row2->tothouse;
 	?>
-	<div class="col-lg-3 text-center">
+	<div class="col-lg-4 text-center">
 		<input class="knob" data-width="150" data-height="150" data-min="0" data-max="850" data-displayPrevious=true data-fgColor="#3498db" data-skin="tron" data-readOnly=true  data-thickness=".2" value="<?php echo $tothouse; ?>">
 		<h4>L'immobilier sur Altis</h4>
 		<span class="text-muted">Les résidents d'Altis possèdent <b><?php echo $tothouse; ?></b> petits pieds-à-terre leurs permetant de stocker toutes sortes de choses.</span>
@@ -83,23 +83,6 @@ while($row2 = $search2->fetch(PDO::FETCH_OBJ)){
 }
 // Fermeture de la connexion à la BDD
 $search2->closeCursor();
-
-$search3 = $DB->query("SELECT SUM(total_vendu) AS totressources FROM `bourses`"); //Affiche le nombre total de vente illegale (en millions)
-while($row3 = $search3->fetch(PDO::FETCH_OBJ)){
-	//Variables
-	$totnolegacy = $row3->totressources;
-	$savnotlegal = number_format(($totnolegacy),0,",",".");
-	$datnolegacy = substr($totnolegacy, -strlen($totnolegacy), 3);
-	?>
-	<div class="col-lg-3 text-center">
-		<input class="knob" data-width="150" data-height="150" data-min="0" data-max="650" data-displayPrevious=true data-fgColor="#e74c3c" data-skin="tron" data-readOnly=true  data-thickness=".2" value="<?php echo $datnolegacy; ?>">
-		<h4>Ressources illégales</h4>
-		<span class="text-muted">Nos farmeurs préféres ont déjà transformé <b><?php echo $savnotlegal ; ?></b> tonnes de produits illicites, que fait la police ?!</span>
-	</div>
-	<?php
-}
-// Fermeture de la connexion à la BDD
-$search3->closeCursor();
 ?>
 </div>
 <?php if( isset( $Exception ) ): ?>

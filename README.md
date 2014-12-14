@@ -55,9 +55,9 @@ Si tout fonctionne bien, vous devriez pouvoir vous connecter au panel, les ident
   - ID : admin
   - MDP: admin
 
-Pensez à les changer en base de donnée ;) (encryption SHA1)
+Pensez à les changer en base de donnée ;) (cryptage SHA1)
 
-C'est fini ! Pour le reste, allez bidouiller dans les fichiers, n'ayez pas peur, c'est du procédural (pas d'objet ni de classe), pas forcément le plus "propre" mais testé et approuvé par de gros serveurs (Fantasma, AltisLifefr.com, Renaissance, GAMEWAVE (Altislife.fr) etc ...)
+C'est fini ! Pour le reste, allez bidouiller dans les fichiers, n'ayez pas peur, c'est du procédural (pas d'objet ni de classe) et donc pas forcément la manière la plus "propre". Cependant, ce panel est testé et utilisé par les plus gros serveurs (Fantasma, AltisLifefr.com, Renaissance, GAMEWAVE (Altislife.fr) etc ...)
 
 Côté technique :
 ========================

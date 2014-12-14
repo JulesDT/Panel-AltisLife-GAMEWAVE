@@ -3,7 +3,7 @@
 function getcurrentpath()
 {   $curPageURL = "";
     if ($_SERVER["HTTPS"] != "on")
-            $curPageURL .= "http://";
+        $curPageURL .= "http://";
      else
         $curPageURL .= "https://" ;
     if ($_SERVER["SERVER_PORT"] == "80")
@@ -221,8 +221,9 @@ function getcurrentpath()
 			$serveur = $basicUrl."serveur";
 			$logs = $basicUrl."logs";
 			$modifier = $basicUrl."modifier";
+			$error = $basicUrl."error";
 			// strlen permet de calculer la longueur de l'URL $location courante. Si elle est égale à 29 (qui est le format de modification d'un profil -> /modifier?j=76561197960498085 alors on masque la liste.)
-			if ($currentUrl != $lastUrl && $currentUrl != $moneyUrl  && $currentUrl != $etaUrl && $currentUrl != $police && $currentUrl != $admins && $currentUrl != $donators && $currentUrl != $users && $currentUrl != $serveur && $currentUrl != $logs && strlen($location) != 29 && substr($currentUrl, 0, -20) != $modifier ){
+			if ($currentUrl != $lastUrl && $currentUrl != $moneyUrl  && $currentUrl != $etaUrl && $currentUrl != $police && $currentUrl != $admins && $currentUrl != $donators && $currentUrl != $users && $currentUrl != $serveur && $currentUrl != $logs && strlen($location) != 29 && substr($currentUrl, 0, -20) != $modifier && $currentUrl != $error){
 				include 'content/liste.php';
 			}
 			?>
@@ -250,7 +251,7 @@ function getcurrentpath()
 			?>
     	</div>
 
-    	<div class="row">
+    	<div class="">
       	<?= $content; ?>
     	</div>
     </div>
@@ -271,7 +272,7 @@ function getcurrentpath()
 		<script>
       $(function () { $('.badge').popover({ trigger: "hover" });});
    </script>
-   <!-- Code de suivit analitycs -->
+   <!-- Code de suivit analytics -->
    <script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -280,7 +281,6 @@ function getcurrentpath()
 
 	  ga('create', 'UA-25526529-55', 'auto');
 	  ga('send', 'pageview');
-
 	</script>
 </body>
 </html>

@@ -4,7 +4,7 @@ if(!Auth::isLogged()){
 }
 ?>
 <div class="row">
-	<div class="col-lg-12">
+	<div class="col-lg-10">
 		<div class="page-header">
 			<h1 id="type">404...</h1>
 		</div>
