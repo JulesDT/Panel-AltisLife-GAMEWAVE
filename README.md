@@ -41,7 +41,7 @@ $bdd = "arma3life";
 $user = "nom_utilisateur";
 $passwd = "mot_de_passe";
 try{
-	$DB = new PDO('mysql:host=$ip;dbname=$bdd','$user','$passwd');
+    $DB = new PDO('mysql:host='.$ip.';dbname='.$bdd, $user, $passwd);
 }
 ```
 
