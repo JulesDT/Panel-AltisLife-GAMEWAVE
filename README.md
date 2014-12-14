@@ -33,6 +33,9 @@ C'est assez simple (n'hésitez pas à me contacter par mail / GitHub). Il vous s
 
 Par la suite, vous devez récupérer la base de donnée "users.sql" (à la racine du Git) et l'importer dans votre base de donnée "arma3life". Avec PHPmyAdmin ou Navicat (par exemple), vous n'avez qu'à créer une nouvelle table "users" dans la base de donnée "arma3life" et importer le fichier fourni ici même :)
 
+Après l'import, vous devriez avoir à peu près ça dans votre table "users" :
+![ScreenShot](http://tuk.fr/s/060914143458.png)
+
 Pour configurer les accès BDD (serveur, utilisateur, password) : vous devez éditer le fichier "bdd.php" en remplacant les champs par vos identifiants de connexion base de donnée respectifs :
 
 ```php
@@ -54,9 +57,6 @@ define( 'SQ_TIMEOUT',     1 );
 define( 'SQ_ENGINE',      SourceQuery :: SOURCE );
 
 ```
-
-Vous devriez avoir à peu près ça dans votre table "users" à la fin ! :
-![ScreenShot](http://tuk.fr/s/060914143458.png)
 
 Première connexion :
 ========================
