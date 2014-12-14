@@ -45,6 +45,16 @@ try{
 }
 ```
 
+En ce qui concerne la liste des utilisateurs connectés (en live), vous devrez mettre l'adresse IP de votre serveur (ex: 37.X.X.X) dans le fichier <b>/ajax/refreshPlayer1.php</b> : 
+
+```php
+define( 'SQ_SERVER_ADDR', '37.X.X.X' );
+define( 'SQ_SERVER_PORT', 2303 );
+define( 'SQ_TIMEOUT',     1 );
+define( 'SQ_ENGINE',      SourceQuery :: SOURCE );
+
+```
+
 Vous devriez avoir à peu près ça dans votre table "users" à la fin ! :
 ![ScreenShot](http://tuk.fr/s/060914143458.png)
 
@@ -55,7 +65,7 @@ Si tout fonctionne bien, vous devriez pouvoir vous connecter au panel, les ident
   - ID : admin
   - MDP: admin
 
-Pensez à les changer en base de donnée ;) (cryptage SHA1)
+<b>Pensez à les changer en base de donnée !</b> (cryptage SHA1)
 
 C'est fini ! Pour le reste, allez bidouiller dans les fichiers, n'ayez pas peur, c'est du procédural (pas d'objet ni de classe) et donc pas forcément la manière la plus "propre". Cependant, ce panel est testé et utilisé par les plus gros serveurs (Fantasma, AltisLifefr.com, Renaissance, GAMEWAVE (Altislife.fr) etc ...)
 
