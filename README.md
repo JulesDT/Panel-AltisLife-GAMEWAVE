@@ -23,6 +23,7 @@ Installation :
 </ul>
 
 ```sql
+-- Exécuter ces deux requêtes dans la table "players"
 ALTER TABLE `players` ADD `duredon` integer(1) default 0 NOT NULL;
 ALTER TABLE `players` ADD `timestamp` integer(11) NULL;
 ```
