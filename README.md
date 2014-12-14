@@ -19,8 +19,9 @@ Installation :
 <ul>
  <li>Activer le <b style="color:#D5001D;">mod rewrite</b> sur apache !</li>
  <li>Autoriser (par défaut normalement) l'<b style="color:#D5001D;">open short tag</b> pour PHP</li>
- <li><b style="color:D5001D;">La structure de la BDD est légèrement chagée (deux colones en plus) afin de traiter les donateurs automatiquements</b></li>
 </ul>
+
+<b style="color:D5001D;">La structure de la BDD est légèrement changée (deux colonnes en plus) afin de traiter les donateurs automatiquements :</b>
 
 ```sql
 -- Exécuter ces deux requêtes dans la table "players"
