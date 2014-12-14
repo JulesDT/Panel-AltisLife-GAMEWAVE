@@ -23,7 +23,8 @@ Installation :
 </ul>
 
 ```sql
-ALTER TABLE `players` ADD `duredon` integer(1) default 0 NOT NULL
+ALTER TABLE `players` ADD `duredon` integer(1) default 0 NOT NULL;
+ALTER TABLE `players` ADD `timestamp` integer(11) NULL;
 ```
 
 C'est assez simple (n'hésitez pas à me contacter par mail / GitHub). Il vous suffit dé télécharger la dernière version du Git, de l'uploader dans votre FTP (local sur la machine hébergeant le serveur Arma, si vous n'avez pas défini de connexion distante SQL dans la configuration MySQL).
