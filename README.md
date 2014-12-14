@@ -3,7 +3,7 @@ Panel Altis Life - GAMEWAVE
 
 Panel de gestion des utilisateurs, des dons et de la quasi totalité des fonctions d'un serveur Altis Life (Arma3)
 
-Réutilisation et modification autorisée par tous, sous condition de citer la source (<b>BloodMotion</b>) ainsi que le lien du Github :-)
+Réutilisation et modification autorisée, merci de citer la source (<b>BloodMotion</b>) ainsi que le lien du Github :-)
 
 <b>Demo (online guest access)</b> : http://admin.altislife.fr/login
 <br>
