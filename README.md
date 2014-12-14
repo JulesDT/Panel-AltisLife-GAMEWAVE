@@ -36,7 +36,7 @@ Par la suite, vous devez récupérer la base de donnée "users.sql" (à la racin
 Après l'import, vous devriez avoir à peu près ça dans votre table "users" :
 ![ScreenShot](http://tuk.fr/s/060914143458.png)
 
-Pour configurer les accès BDD (serveur, utilisateur, password) : vous devez éditer le fichier "bdd.php" en remplacant les champs par vos identifiants de connexion base de donnée respectifs :
+Pour configurer les accès BDD (serveur, utilisateur, password) : vous devez éditer le fichier "<b>bdd.php</b>" en remplacant les champs par vos identifiants de connexion base de donnée respectifs :
 
 ```php
 $ip = "localhost";
