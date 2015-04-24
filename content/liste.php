@@ -15,14 +15,14 @@
 		<a href="/" class="list-group-item" style="background-color:#F8F8F8; color:#000;"><b>Liste des joueurs enregistrés sur le serveur ALTISLIFE</b></a>
     
     
-    <ul class="list-group" name="search"> <!-- Permet d'afficher la liste de tout les joueurs (si pas de limit dans la requetes SQL) -->
+    <ul class="list-group" style="min-height: 298px; overflow: auto" name="search"> <!-- Permet d'afficher la liste de tout les joueurs (si pas de limit dans la requetes SQL) -->
     <?php
 		if ($search_value == '') {
 			$search = $DB->query("SELECT DISTINCT * FROM players ORDER BY rand() LIMIT 0, 7"); //Affiche des joueurs de manière aléatoire (limite de 7 résultats)
 		  echo '<table style="width:100%;">';
 			while($row = $search->fetch(PDO::FETCH_OBJ)){
         //Nom du joueur
-				echo '<a style="" class="list-group-item" href="modifier?j='.$row->playerid.'" value="'.$row->playerid.'">'.$row->name.'';
+				echo '<a class="list-group-item" href="modifier?j='.$row->playerid.'" value="'.$row->playerid.'">'.$row->name.'';
 				//Variables pour les infos bdd
 				$pseudo=$row->name;
         $dntr_lvl=$row->donatorlvl;

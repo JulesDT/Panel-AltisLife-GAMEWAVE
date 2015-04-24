@@ -3,11 +3,7 @@ if(!Auth::isLogged()){
 	header('Location:'.WEBROOT);
 }
 ?>
-<div class="row">
-	<div class="col-lg-10">
-		<div class="page-header">
-			<h1 id="type">404...</h1>
-		</div>
-		<p>La page que vous cherchez n'est plus disponible ...</p>
-	</div>
+
+<div class="col-lg-12">
+	<h2 class="text-center">Erreur 404, la page que vous avez essayé d'atteindre n'existe plus.</h2>
 </div>

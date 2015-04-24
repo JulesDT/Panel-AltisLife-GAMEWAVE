@@ -21,7 +21,7 @@
 			<form action="<?=WEBROOT?>joueur" method="post">
 				<a href="/" class="list-group-item" style="background-color:#F8F8F8; color:#000;"<b>Liste des joueurs enregistrés sur le serveur ALTISLIFE</b></a>
 
-        <ul class="list-group" name="search"> <!-- Permet d'afficher la liste de tout les joueurs (si pas de limit dans la requetes SQL) -->
+        <ul class="list-group" style="min-height: 298px; overflow: auto" name="search"> <!-- Permet d'afficher la liste de tout les joueurs (si pas de limit dans la requetes SQL) -->
         <?php
 				if ($search_value == '') {
 					$search = $DB->query("SELECT DISTINCT * FROM players WHERE coplevel = '1' OR coplevel = '2' OR coplevel = '3' OR coplevel = '4' OR coplevel = '5' OR coplevel = '6' OR coplevel = '7' ORDER BY adminlevel DESC"); //Affiche les 150 joueurs les plus riches

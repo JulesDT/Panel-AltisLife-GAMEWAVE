@@ -20,7 +20,7 @@
 				<a href="/" class="list-group-item" style="background-color:#F8F8F8; color:#000;"><b>Liste des joueurs enregistrés sur le serveur ALTISLIFE</b></a>
         
         
-        <ul class="list-group" name="search"> <!-- Permet d'afficher la liste de tout les joueurs (si pas de limit dans la requetes SQL) -->
+        <ul class="list-group" style="min-height: 298px; overflow: auto" name="search"> <!-- Permet d'afficher la liste de tout les joueurs (si pas de limit dans la requetes SQL) -->
         <?php
 				if ($search_value == '') {
 					$search = $DB->query("SELECT DISTINCT * FROM players ORDER BY uid DESC LIMIT 0, 100"); //Affiche la liste des 100 derniers joueurs qui se sont co au serveur

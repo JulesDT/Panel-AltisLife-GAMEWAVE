@@ -1,4 +1,5 @@
 <?php
+/*
 if(!Auth::isLogged() && !Auth::isAdmin()){
 	header('Location:'.WEBROOT);
 }
@@ -8,4 +9,5 @@ if(isset($_GET['j']) && Auth::isAdmin()) {
 	$DB->exec("DELETE FROM vehicles WHERE pid='$j'");
 	header('Location:'.WEBROOT.'success');
 }
+*/
 ?>

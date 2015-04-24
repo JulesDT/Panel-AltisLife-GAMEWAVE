@@ -2,6 +2,13 @@
 if(!Auth::isLogged()){
 	header('Location:'.WEBROOT);
 }
+// Récupération de l'id du joueur
+$j = $_GET['j'];
+$jLong = strlen($j);
+
+if(!is_numeric($j) || $jLong !== 17){
+	header("location: /error");
+}
 ?>
 <div class="container">
   <div class="row">
@@ -12,7 +19,7 @@ if(!Auth::isLogged()){
       // TEST POST 
       /*
       echo '<pre>';
-      print_r($_POST);
+      vardump($_POST);
       echo '</pre>';
       */
       // on initlisalise la valeur du champ de recherche
@@ -22,6 +29,7 @@ if(!Auth::isLogged()){
 
 				// C'est ici la source de tout probleme =D (dans le retour du $post)
 				if(isset($_POST) && isset($_POST['cash']) && isset($_POST['bankacc'])){
+					// ADMIN
 					if(Auth::isAdmin()){
 						$joueur = $_GET['j'];
 						$cash = $_POST['cash'];
@@ -29,12 +37,13 @@ if(!Auth::isLogged()){
 						$adminlevel = $_POST['adminlevel'];
 						$coplevel = $_POST['coplevel'];
 						$donatorlvl = $_POST['donatorlvl'];
-	          $times = $_POST['times'];
-	          $mounthDon = $_POST['mounthDon'];
+						$times = $_POST['times'];
+						$mounthDon = $_POST['mounthDon'];
 						$sqlupdate = "UPDATE players SET cash='$cash', bankacc='$bankacc', adminlevel='$adminlevel', coplevel='$coplevel', donatorlvl='$donatorlvl', timestamp='$times', duredon='$mounthDon' WHERE playerid='$joueur'";  //Timestamppermet de définir la date du don (mis à jour lors de l'update du don)
 						$update = $DB->exec($sqlupdate);
 						include WEBROOT.'success.php';
 					}
+					// MODO
 					elseif(Auth::isModo()){
 						$joueur = $_GET['j'];
 						$cash = $_POST['cash'];
@@ -43,17 +52,11 @@ if(!Auth::isLogged()){
 						$update = $DB->exec($sqlupdate);
 						include WEBROOT.'success.php';
 					}
+					// GUEST
 					elseif(Auth::isGuest()){
 						header('Location:'.WEBROOT);
 					}
 				}
-			}
-			// Récupération de l'id du joueur
-			$j = $_GET['j'];
-			$jLong = strlen($j);
-			
-			if(!is_numeric($j) || $jLong !== 17){
-				exit('CACA MOU FDP !');
 			}
 			
 			// Requetage
@@ -85,7 +88,7 @@ if(!Auth::isLogged()){
 	  <div style="display:block;margin-top:-60px; margin-bottom:120px;">	
 	    <?php
 	    	// Recherche et gametracker
-				include 'search.php';
+			include 'search.php';
 			?>
 		</div>
 
@@ -99,10 +102,6 @@ if(!Auth::isLogged()){
         <?php if(Auth::isAdmin()){ ?><button type="submit" class="btn btn-success" style="font-weight:bold; text-transform:uppercase;"><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;&nbsp;Update</button><?php } ?>
         <?php if(Auth::isModo()){ ?><button type="submit" class="btn btn-success" style="font-weight:bold; text-transform:uppercase;"><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;&nbsp;Update</button><?php } ?>
         <?php if(Auth::isGuest()){ ?><button type="submit" class="btn btn-success" disabled style="font-weight:bold; text-transform:uppercase;"><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;&nbsp;Update</button><?php } ?>
-        <!-- Suppression / Wipe -->
-        <?php if(Auth::isAdmin()){ ?><a href="<?=WEBROOT?>delete_player?j=<?=$_GET['j']?>" class="btn btn-warning" style="font-weight:bold; text-transform:uppercase;"><span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;Delete</a><?php } ?>							
-        <?php if(Auth::isModo()){ ?><a href="<?=WEBROOT?>delete_player?j=<?=$_GET['j']?>" disabled class="btn btn-warning" style="font-weight:bold; text-transform:uppercase;"><span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;Delete</a><?php } ?>
-        <?php if(Auth::isGuest()){ ?><a href="#" disabled class="btn btn-warning" style="font-weight:bold; text-transform:uppercase;"><span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;Delete</a><?php } ?>
       </div>
       
       <br>
@@ -132,7 +131,7 @@ if(!Auth::isLogged()){
                 <span class="input-group-addon">
                   <span class="glyphicon glyphicon-user"></span>
                 </span>
-                <input disabled type="text" name="j" value="<?=$rows->playerid?>" class="form-control">
+                <input disabled type="text" name="j" value="<?=$rows->playerid;?>" class="form-control">
               </div>
             </p>
           </div>
@@ -301,7 +300,6 @@ if(!Auth::isLogged()){
                   <option <?php if($rows->coplevel==5){ echo 'selected="selected"'; } ?> value="5">Lieutenant</option>
                   <option <?php if($rows->coplevel==6){ echo 'selected="selected"'; } ?> value="6">Commandant</option>
                   <option <?php if($rows->coplevel==7){ echo 'selected="selected"'; } ?> value="7">Colonel</option>
-								  <option <?php if($rows->coplevel==8){ echo 'selected="selected"'; } ?> value="8">Capitaine</option>
                 </select>
               </div>
             </p>
@@ -322,7 +320,6 @@ if(!Auth::isLogged()){
                   <option <?php if($rows->coplevel==5){ echo 'selected="selected"'; } ?> value="5">Lieutenant</option>
                   <option <?php if($rows->coplevel==6){ echo 'selected="selected"'; } ?> value="6">Commandant</option>
                   <option <?php if($rows->coplevel==7){ echo 'selected="selected"'; } ?> value="7">Colonel</option>
-									<option <?php if($rows->coplevel==8){ echo 'selected="selected"'; } ?> value="8">Capitaine</option>
                 </select>
               </div>
             </p>
@@ -351,7 +348,7 @@ if(!Auth::isLogged()){
 
           <!-- Donateur -->
           <?php if(Auth::isAdmin()){ ?>
-          <div style="float:right; width:44%">
+          <div style="float:right; width:44%; margin-bottom:15px;">
             <p>
             <strong>Donateur :</strong>
               <div style="width:35%; float:left;">
@@ -366,12 +363,18 @@ if(!Auth::isLogged()){
                   <option <?php if($rows->duredon==1){ echo 'selected="selected"'; } ?> value="1">1 mois</option>
                   <option <?php if($rows->duredon==2){ echo 'selected="selected"'; } ?> value="2">2 mois</option>
                   <option <?php if($rows->duredon==3){ echo 'selected="selected"'; } ?> value="3">3 mois</option>
+				  <option <?php if($rows->duredon==4){ echo 'selected="selected"'; } ?> value="4">4 mois</option>
+				  <option <?php if($rows->duredon==5){ echo 'selected="selected"'; } ?> value="5">5 mois</option>
+				  <option <?php if($rows->duredon==6){ echo 'selected="selected"'; } ?> value="6">6 mois</option>
+				  <option <?php if($rows->duredon==12){ echo 'selected="selected"'; } ?> value="12">12 mois</option>
                 </select>
               </div>
             </p>
           </div>
-          <?php } ?>
-
+		<?php
+		  } 
+		  ?>
+		  
           <?php if(Auth::isModo()){ ?>
           <div style="float:right; width:44%">
             <p>
@@ -388,6 +391,10 @@ if(!Auth::isLogged()){
                   <option <?php if($rows->duredon==1){ echo 'selected="selected"'; } ?> value="1">1 mois</option>
                   <option <?php if($rows->duredon==2){ echo 'selected="selected"'; } ?> value="2">2 mois</option>
                   <option <?php if($rows->duredon==3){ echo 'selected="selected"'; } ?> value="3">3 mois</option>
+				  <option <?php if($rows->duredon==4){ echo 'selected="selected"'; } ?> value="4">4 mois</option>
+				  <option <?php if($rows->duredon==5){ echo 'selected="selected"'; } ?> value="5">5 mois</option>
+				  <option <?php if($rows->duredon==6){ echo 'selected="selected"'; } ?> value="6">6 mois</option>
+				  <option <?php if($rows->duredon==12){ echo 'selected="selected"'; } ?> value="12">12 mois</option>
                 </select>
               </div>
             </p>
@@ -410,15 +417,246 @@ if(!Auth::isLogged()){
                   <option <?php if($rows->duredon==1){ echo 'selected="selected"'; } ?> value="1">1 mois</option>
                   <option <?php if($rows->duredon==2){ echo 'selected="selected"'; } ?> value="2">2 mois</option>
                   <option <?php if($rows->duredon==3){ echo 'selected="selected"'; } ?> value="3">3 mois</option>
+				  <option <?php if($rows->duredon==4){ echo 'selected="selected"'; } ?> value="4">4 mois</option>
+				  <option <?php if($rows->duredon==5){ echo 'selected="selected"'; } ?> value="5">5 mois</option>
+				  <option <?php if($rows->duredon==6){ echo 'selected="selected"'; } ?> value="6">6 mois</option>
+				  <option <?php if($rows->duredon==12){ echo 'selected="selected"'; } ?> value="12">12 mois</option>
                 </select>
               </div>
             </p>
-          </div>
+          </div>		  
           <?php } ?>
         </div>
 
+		<!-- Licences -->
+		<?php if(Auth::isAdmin()){ ?>
+		<div style="float:right; width:48%;">
+		    <div>
+				<p>
+				<strong>Licences :</strong>
+					<?php
+					$suppr = array("\"", "`", "[", "]");
+					$lineLicenses = str_replace($suppr, "", $rows->civ_licenses);
+					$arrayLicenses = preg_split("/,/", $lineLicenses);
+					$totarrayLicenses = count($arrayLicenses);
+					$y=0;
+					$n=0;
+
+					for($i=1; $y < $totarrayLicenses; $i++){
+					?>
+						<div style="margin-top:5px;width:100%;">
+							<div class="input-group">
+							<input type="text" disabled class="form-control" placeholder="<?php echo $arrayLicenses[$y];?>">
+								<div class="input-group-btn">
+									<span class="input-group-btn">
+									<?php
+										if($arrayLicenses[$i] == 1){
+											echo '<button onclick="SAVElicenses('.$arrayLicenses[$i].','.$n.')" style="width:90px;" class="btn btn-danger" type="button">Retirer</button>';
+										}else{
+											echo '<button onclick="SAVElicenses('.$arrayLicenses[$i].','.$n.')" style="width:90px;" class="btn btn-default" type="button">Ajouter</button>';
+										}
+									?>
+									</span>
+								</div>
+							</div>
+						</div>
+					<?php 
+						// Pair
+						$y=$y+2;
+						// Impair
+						$i=$i+1;
+						// normal
+						$n=$n+1;
+					}
+					?>
+					<script>
+						function SAVElicenses(type, id){
+							$(document).ready( function () { 
+								$.ajax({
+									type: "POST",
+									url: "/ajax/update_licences.php",
+									data: "type="+type+"&pid=<?=$rows->playerid;?>"+"&id="+id,
+									success: function(msg){
+										// Récupération des données du echo dans un tableau
+										var res = msg.split(";");
+										if(res[0]==0){
+											location.reload();
+											//alert("type "+res[0] + " - msg : "+res[1]);
+										}
+										if(res[0]==1){
+											//alert("type "+res[0] + " - msg : "+res[1]);
+											location.reload();
+										}
+										if(res[0]==2){
+											alert("type "+res[0] + " - msg : "+res[1]);
+										}
+									}
+								});
+								return false;
+							});
+
+						}
+					</script>
+				</p>
+			</div>
+		</div>
+		<?php } ?>
+		
+		<?php if(Auth::isModo()){ ?>
+		<div style="float:right; width:48%;">
+		    <div>
+				<p>
+				<strong>Licences :</strong>
+					<?php
+					$suppr = array("\"", "`", "[", "]");
+					$lineLicenses = str_replace($suppr, "", $rows->civ_licenses);
+					$arrayLicenses = preg_split("/,/", $lineLicenses);
+					$totarrayLicenses = count($arrayLicenses);
+					$y=0;
+					$n=0;
+
+					for($i=1; $y < $totarrayLicenses; $i++){
+					?>
+						<div style="margin-top:5px;width:100%;">
+							<div class="input-group">
+							<input type="text" disabled class="form-control" placeholder="<?php echo $arrayLicenses[$y];?>">
+								<div class="input-group-btn">
+									<span class="input-group-btn">
+									<?php
+										if($arrayLicenses[$i] == 1){
+											echo '<button onclick="SAVElicenses('.$arrayLicenses[$i].','.$n.')" style="width:90px;" class="btn btn-danger" type="button">Retirer</button>';
+										}else{
+											echo '<button onclick="SAVElicenses('.$arrayLicenses[$i].','.$n.')" style="width:90px;" class="btn btn-default" type="button">Ajouter</button>';
+										}
+									?>
+									</span>
+								</div>
+							</div>
+						</div>
+					<?php 
+						// Pair
+						$y=$y+2;
+						// Impair
+						$i=$i+1;
+						// normal
+						$n=$n+1;
+					}
+					?>
+					<script>
+						function SAVElicenses(type, id){
+							$(document).ready( function () { 
+								$.ajax({
+									type: "POST",
+									url: "/ajax/update_licences.php",
+									data: "type="+type+"&pid=<?=$rows->playerid;?>"+"&id="+id,
+									success: function(msg){
+										// Récupération des données du echo dans un tableau
+										var res = msg.split(";");
+										if(res[0]==0){
+											location.reload();
+											//alert("type "+res[0] + " - msg : "+res[1]);
+										}
+										if(res[0]==1){
+											//alert("type "+res[0] + " - msg : "+res[1]);
+											location.reload();
+										}										
+										if(res[0]==2){
+											alert("type "+res[0] + " - msg : "+res[1]);
+										}
+									}
+								});
+								return false;
+							});
+
+						}
+					</script>
+				</p>
+			</div>
+		</div>
+		<?php } ?>
+		
+		
+		<?php if(Auth::isGuest()){ ?>
+		<div style="float:right; width:48%;">
+		    <div>
+				<p>
+				<strong>Licences :</strong>
+				<?php
+				$suppr = array("\"", "`", "[", "]");
+				$lineLicenses = str_replace($suppr, "", $rows->civ_licenses);
+				$arrayLicenses = preg_split("/,/", $lineLicenses);
+				$totarrayLicenses = count($arrayLicenses);
+				$y=0;
+
+				for($i=1; $i < $totarrayLicenses; $i++){
+				?>
+					<div style="margin-top:5px;width:100%;">
+						<div class="input-group">
+						<input type="text" disabled class="form-control" placeholder="<?php echo $arrayLicenses[$y];?>">
+							<div class="input-group-btn">
+								<span class="input-group-btn">
+								<?php
+									if($arrayLicenses[$i] == 1){
+										echo '<button style="width:90px;" class="btn btn-danger" type="button" disabled>Retirer</button>';
+									}else{
+										echo '<button style="width:90px;" class="btn btn-default" type="button" disabled>Ajouter</button>';
+									}
+								?>
+								</span>
+							</div>
+						</div>
+					</div>
+				<?php 
+					// Pair
+					$y=$y+2;
+					// Impair
+					$i=$i+1;
+					}
+				?>
+				</p>
+			</div>
+		</div>
+		<?php } ?>
+		
+		<!-- Garage visible par tous -->
+		<div style="width:48%;">
+		  <p>
+			<strong>Garage :</strong>
+		  </p>
+		  <div class="panel panel-default">
+			<div class="panel-heading">
+			  <h3 class="panel-title"><b>Véhicules de <?=$rows->name?></b></h3>
+			</div>
+			  <!-- Table -->
+			  <table class="table">
+				<tbody>
+				<?php
+					foreach ($res3->fetchAll() as $rows3)
+					{
+						$rows3_classname[] = $rows3->classname;
+						$rows3_doublon[] = $rows3->nbr_doublon;
+					}
+					
+					$tot = count($rows3_classname);
+					
+					if($tot > 0){
+						for ($i=0; $i < $tot; $i++)
+						{
+							echo '<tr><td><a href="https://community.bistudio.com/wiki/File:Arma3_CfgVehicles_'.$rows3_classname[$i].'.jpg" onclick="window.open(this.href); return false;">'.$rows3_classname[$i].'</a></td>';
+							echo '<td><span class="badge" style="background:#428BCA; width:auto; float:right;">'.$rows3_doublon[$i].' Examplaire(s)</span></td></tr>';
+						}
+					}else{ 
+						echo '<tr><td><a href="#">Pas de véhicule pour cet utilisteur</a></td>';
+						echo '<td><span class="badge" style="background:#428BCA; width:auto; float:right;">Aucun examplaire</span></td></tr>';
+					}
+				?>
+				</tbody>
+			  </table>
+		  </div>
+		</div>
+		
         <!-- Equipement civil visible par tous -->							
-        <div style="float:right; width:48%;">
+        <div style="width:48%;">
           <div>
             <p>
             <strong>Equipement civil :</strong>
@@ -433,7 +671,7 @@ if(!Auth::isLogged()){
         </div>
 
         <!-- Equipement police visible par tous -->
-        <div style="float:right; width:48%;">
+        <div style="float:left; width:48%;">
           <div>
             <p>
             <strong>Equipement police :</strong>
@@ -447,35 +685,6 @@ if(!Auth::isLogged()){
           </div>
         </div>
   
-        
-        <!-- Garage visible par tous -->
-        <div style="float:left; width:48%;">
-          <p>
-            <strong>Garage :</strong>
-          </p>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title"><b>Véhicules de <?=$rows->name?></b></h3>
-            </div>
-              <!-- Table -->
-              <table class="table">
-                <tbody>
-                <?php
-                  foreach ($res3->fetchAll() as $rows3)
-                  {
-                    echo (
-                      '<tr><td><a href="https://community.bistudio.com/wiki/File:Arma3_CfgVehicles_'.$rows3->classname.'.jpg" onclick="window.open(this.href); return false;">'
-                      .$rows3->classname.
-                      '</a></td><td><span class="badge" style="background:#428BCA; width:auto; float:right;">'
-                      .$rows3->nbr_doublon.
-                      ' Examplaire(s)</span></td></tr>'
-                      );
-                  }
-                ?>
-                </tbody>
-              </table>
-          </div>
-        </div>
       <!-- FIN -->
     </form>
 		<?php
@@ -485,7 +694,7 @@ if(!Auth::isLogged()){
       else {
         ?>
         <a href="/" class="list-group-item" style="background-color:#F8F8F8; color:#000; margin-top:140px;"><b>Liste des joueurs enregistrés sur le serveur ALTISLIFE</b></a>       
-        <ul class="list-group" name="search"> 
+        <ul class="list-group" style="min-height: 298px; overflow: auto" name="search"> 
       <?php
         include 'search_req.php';
       }
