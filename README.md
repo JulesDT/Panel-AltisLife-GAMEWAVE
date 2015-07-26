@@ -34,7 +34,7 @@ C'est assez simple (n'hésitez pas à me contacter par mail / GitHub). Il vous s
 Par la suite, vous devez récupérer la base de donnée "users.sql" (à la racine du Git) et l'importer dans votre base de donnée "arma3life". Avec PHPmyAdmin ou Navicat (par exemple), vous n'avez qu'à créer une nouvelle table "users" dans la base de donnée "arma3life" et importer le fichier fourni ici même :)
 
 Après l'import, vous devriez avoir à peu près ça dans votre table "users" :
-![ScreenShot](http://tuk.fr/s/060914143458.png)
+![ScreenShot](http://tuk.fr/s/260715184512.png)
 
 Pour configurer les accès BDD (serveur, utilisateur, password) : vous devez éditer le fichier "<b>bdd.php</b>" en remplacant les champs par vos identifiants de connexion base de donnée respectifs :
 
@@ -78,24 +78,3 @@ Côté technique :
   - Sessions
   - Boostrap v3
   - Niveau d'administration (visiteur [1], modérateur [2], admin[3])
-
-Captures d'écran
-========================
-
-connexion
-![ScreenShot](http://tuk.fr/s/300614183612.png)
-
-accueil
-![ScreenShot](http://tuk.fr/s/300614183705.png)
-
-recherche par pseudo / ID
-![ScreenShot](http://tuk.fr/s/300614184152.png)
-
-profil
-![ScreenShot](http://tuk.fr/s/300614183903.png)
-
-RconPHP (infos serveur)
-![ScreenShot](http://tuk.fr/s/250714174830.png)
-
-Utilisateurs du panel
-![ScreenShot](http://tuk.fr/s/090714233308.png)
