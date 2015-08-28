@@ -155,7 +155,7 @@ function getcurrentpath()
 						<?php
 						if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['role'])){
 							$username=$_POST['username'];
-							$password=sha1($_POST['password']);
+							$password = hash('sha512',($_POST['password']));
 							$pseudo = ($_POST['pseudo']);
 							$role=$_POST['role'];
 							if(!empty($username) && !empty($password) && !empty($role) && !empty($pseudo)){

@@ -31,7 +31,7 @@ if(Auth::isLogged()){
 		}
 		else{
 			$username = $_POST['username'];
-			$password = sha1($_POST['password']);	
+			$password = hash('sha512',($_POST['password']));	
 			if(!empty($username) && !empty($password)){
 				$tab_co = array(
 					'username' => $username,
