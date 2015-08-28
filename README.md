@@ -65,7 +65,9 @@ Si tout fonctionne bien, vous devriez pouvoir vous connecter au panel, les ident
   - ID : admin
   - MDP: admin
 
-<b>Pensez à les changer en base de donnée !</b> (cryptage SHA1)
+<b>Pensez à les changer en base de donnée !</b> (cryptage SHA-512)
+
+<i>Attention ! Depuis le 28-08-2015, le cryptage est passé de SHA1 à SHA-512. Si vous mettez à jour la plateforme, tous les mots de passe entrés en base de donnée ne seront plus valables et devront être modifiés.</i>
 
 C'est fini ! Pour le reste, allez bidouiller dans les fichiers, n'ayez pas peur, c'est du procédural (pas d'objet ni de classe) et donc pas forcément la manière la plus "propre". Cependant, ce panel est testé et utilisé par les plus gros serveurs (Fantasma, AltisLifefr.com, Renaissance, GAMEWAVE (Altislife.fr) etc ...)
 
